@@ -3,15 +3,15 @@ package net.study.resume.model;
 public enum LanguageType {
 
 	ALL,
-	
+
 	SPOKEN,
-	
+
 	WRITING;
 	
 	public String getDbValue() {
 		return name().toLowerCase();
 	}
-	
+
 	public LanguageType getReverseType() {
 		if (this == SPOKEN) {
 			return WRITING;
