@@ -1,4 +1,5 @@
 <%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <div class="panel panel-primary">
@@ -9,6 +10,7 @@
 		</h3>
 	</div>
 	<div class="panel-body">
+	<c:forEach items="${profile.practics }" var="practic">
 		<ul class="timeline">
 			<li>
 				<div class="timeline-badge danger">
@@ -16,25 +18,30 @@
 				</div>
 				<div class="timeline-panel">
 					<div class="timeline-heading">
-						<h4 class="timeline-title">Java Advanced Course at DevStudy.net</h4>
+						<h4 class="timeline-title">
+								${practic.position } at ${practic.company }
+							
+						</h4>
 						<p>
-							<small class="dates"> <i class="fa fa-calendar"></i> Mar 2016 - <strong class="label label-danger">Current</strong></small>
+							<small class="dates"> <i class="fa fa-calendar">${practic.beginDate }</i>
+								<strong class="label label-danger">Current</strong>
+							</small>
 						</p>
 					</div>
 					<div class="timeline-body">
 						<p>
-							<strong>Responsibilities included:</strong> Developing the web application 'online-resume' using bootstrap HTML template, downloaded from
-							intenet. Populating database by test data and uploading web project to AWS EC2 instance
+							<strong>Responsibilities included:</strong>${practic.responsibilities }
 						</p>
 						<p>
-							<strong>Demo: </strong><a href="http://LINK_TO_DEMO_SITE">http://LINK_TO_DEMO_SITE</a>
+							<strong>Demo: </strong><a href="${practic.demo }">${practic.demo }</a>
 						</p>
 						<p>
-							<strong>Source code: </strong><a href="https://github.com/TODO">https://github.com/TODO</a>
+							<strong>Source code: </strong><a href="${practic.src }">${practic.src }</a>
 						</p>
 					</div>
 				</div>
 			</li>
 		</ul>
+		</c:forEach>
 	</div>
 </div>

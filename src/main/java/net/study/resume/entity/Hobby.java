@@ -18,6 +18,8 @@ import javax.persistence.Transient;
 @Entity
 @Table(name="hobby")
 public class Hobby extends AbstractEntity<Long> implements Serializable, Comparable<Hobby>, ProfileEntity {
+	private static final long serialVersionUID = 3190630540557846151L;
+
 	@Id
 	@SequenceGenerator(name="HOBBY_ID_GENERATOR", sequenceName="HOBBY_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="HOBBY_ID_GENERATOR")

@@ -7,19 +7,19 @@
 		<a style="color: black;" href="/edit">${profile.fullName}</a>
 	</h1>
 	<h6 class="text-center">
-		<strong>Odessa, Ukraine</strong>
+		<strong>${profile.city }, ${profile.country }</strong>
 	</h6>
 	<h6 class="text-center">
-		<strong>Age:</strong> 27, <strong>Birthday:</strong> Feb 26, 1989
+		<strong>Age:</strong>${profile.age }, <strong>Birthday:</strong> ${profile.birthDay }
 	</h6>
 	<div class="list-group contacts">
-		<a class="list-group-item" href="tel:+380507525137"><i class="fa fa-phone"></i> +380507525137</a> 
-		<a class="list-group-item" href="mailto:howard-wolowitz@gmail.com"><i class="fa fa-envelope"></i> howard-wolowitz@gmail.com</a> 
-		<a class="list-group-item" href="javascript:void(0);"><i class="fa fa-skype"></i>howard-wolowitz</a> 
-		<a target="_blank" class="list-group-item" href="https://vk.com/howard-wolowitzs"><i class="fa fa-vk"></i> https://vk.com/howard-wolowitz</a> 
-		<a target="_blank" class="list-group-item" href="https://facebook.com/howard-wolowitz"><i class="fa fa-facebook"></i> https://facebook.com/howard-wolowitz</a> 
-		<a target="_blank" class="list-group-item" href="https://linkedin.com/howard-wolowitz"><i class="fa fa-linkedin"></i> https://linkedin.com/howard-wolowitz</a> 
-		<a target="_blank" class="list-group-item" href="https://github.com/howard-wolowitz"><i class="fa fa-github"></i>https://github.com/howard-wolowitz</a> 
-		<a target="_blank" class="list-group-item" href="https://stackoverflow.com/howard-wolowitz"><i class="fa fa-stack-overflow"></i> https://stackoverflow.com/howard-wolowitz</a>
+		<a class="list-group-item" href=${profile.phone }><i class="fa fa-phone"></i>${profile.phone }</a> 
+		<a class="list-group-item" href="mailto:${profile.email }"><i class="fa fa-envelope"></i>${profile.email }</a> 
+		<a class="list-group-item" href="javascript:void(0);"><i class="fa fa-skype"></i>${profile.contacts.skype }</a> 
+		<a target="_blank" class="list-group-item" href="${profile.contacts.vkontakte }"><i class="fa fa-vk"></i>${profile.contacts.vkontakte }</a> 
+		<a target="_blank" class="list-group-item" href="${profile.contacts.facebook }"><i class="fa fa-facebook"></i> ${profile.contacts.facebook }</a> 
+		<a target="_blank" class="list-group-item" href="${profile.contacts.linkedin }"><i class="fa fa-linkedin"></i> ${profile.contacts.linkedin }</a> 
+		<a target="_blank" class="list-group-item" href="${profile.contacts.github }"><i class="fa fa-github"></i>${profile.contacts.github }</a> 
+		<a target="_blank" class="list-group-item" href="${profile.contacts.stackoverflow }"><i class="fa fa-stack-overflow"></i>${profile.contacts.stackoverflow }</a>
 	</div>
 </div>

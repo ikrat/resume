@@ -10,11 +10,10 @@
 	</div>
 	<div class="panel-body">
 		<h4>
-			<strong>Junior java developer position</strong>
+			<strong>${profile.objective }</strong>
 		</h4>
 		<p>
-			<strong>Summary of Qualifications: </strong> <br> Three Java professional courses with developing one console application and two web
-			applications: blog and resume (Links to demo are provided)
+			<strong>Summary of Qualifications: </strong> <br> ${profile.summary }
 		</p>
 	</div>
 </div>

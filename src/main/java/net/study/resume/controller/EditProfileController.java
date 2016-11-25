@@ -28,7 +28,7 @@ public class EditProfileController {
 	}
 	
 	@RequestMapping(value="/edit/skills", method=RequestMethod.GET)
-	public String getEdiTechtSkills(Model model){
+	public String getEditTechSkills(Model model){
 		model.addAttribute("skillForm", new SkillForm(profileRepository.findOne(1L).getSkills()));
 		return gotoSkillsJSP(model);
 	}

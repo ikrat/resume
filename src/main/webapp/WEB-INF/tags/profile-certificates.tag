@@ -1,4 +1,5 @@
 <%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 <div class="panel panel-primary certificates">
@@ -9,8 +10,11 @@
 		</h3>
 	</div>
 	<div class="panel-body">
-		<a data-title="Certificate" href="/media/certificates/0a083e85-b77d-43f1-a626-37b0c45b1cb5.jpg" class="thumbnail certificate-link"> <img
-			alt="Certificate" src="/media/certificates/0a083e85-b77d-43f1-a626-37b0c45b1cb5-sm.jpg" class="img-responsive"> <span>Certificate</span>
-		</a>
+		<c:forEach items="${profile.certificates }" var="certificate">
+			<a data-title="Certificate" href="${certificate.largeUrl }" class="thumbnail certificate-link"> 
+				<img alt="Certificate" src="${certificate.smallUrl }" class="img-responsive"> <span>${certificate.name }</span>
+			</a>
+		</c:forEach>
+
 	</div>
 </div>

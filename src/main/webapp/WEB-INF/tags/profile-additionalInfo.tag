@@ -8,5 +8,5 @@
 			</a>
 		</h3>
 	</div>
-	<div class="panel-body">Married, Two children</div>
+	<div class="panel-body">${profile.info }</div>
 </div>

@@ -31,7 +31,7 @@ public class Contacts implements Serializable {
 	private String stackoverflow;
 
 	public Contacts() {
-		super();// TODO Auto-generated constructor stub
+		super();
 	}
 
 	public String getSkype() {

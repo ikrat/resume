@@ -11,7 +11,7 @@
 		<input type="hidden" name="items[${index }].id" value="${skill.id }" /> 
 		<select name="items[${index }].category" class="form-control">
 			<c:forEach var="category" items="${skillCategories }">
-			<option value="${category.category }" ${category.category == skill.category ? ' selected="selected"' : ''}>${category.category }</option>
+				<option value="${category.category }" ${category.category == skill.category ? ' selected="selected"' : ''}>${category.category }</option>
 			</c:forEach>
 		</select>
 	</div>

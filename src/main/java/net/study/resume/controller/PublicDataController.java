@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import net.study.resume.entity.Profile;
 import net.study.resume.repository.storage.ProfileRepository;
-import net.study.resume.service.NameService;
 
 @Controller
 public class PublicDataController {
