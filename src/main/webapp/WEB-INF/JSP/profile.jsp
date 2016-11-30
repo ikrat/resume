@@ -15,8 +15,8 @@
 			<resume:profile-objective/>
 			<resume:profile-skills />
 			<resume:profile-practic />
-			<resume:profile-certificates/>
-			<resume:profile-courses/>
+			<resume:profile-certificates />
+			<resume:profile-courses />
 			<resume:profile-education />
 		</div>
 		<div class="col-xs-12 visible-xs-block">

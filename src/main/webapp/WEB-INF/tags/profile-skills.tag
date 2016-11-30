@@ -19,7 +19,6 @@
 						<td>${skill.category }</td>
 						<td>${skill.value }</td>
 					</tr>
-
 				</c:forEach>
 			</tbody>
 		</table>
