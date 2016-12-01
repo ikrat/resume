@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import net.study.resume.annotation.constraints.EnglishLanguage;
 
 @Entity
 @Table(name="skill")
@@ -25,9 +28,13 @@ public class Skill extends AbstractEntity<Long> implements Serializable, Profile
 	private Long id;
 
 	@Column(nullable=false, length=50)
+	@EnglishLanguage
+	@Size(min=1)
 	private String category;
 
 	@Column(nullable=false, length=2147483647)
+	@EnglishLanguage
+	@Size(min=1)
 	private String value;
 
 	//bi-directional many-to-one association to Profile
@@ -106,5 +113,4 @@ public class Skill extends AbstractEntity<Long> implements Serializable, Profile
 			return false;
 		return true;
 	}
-
 }

@@ -1,5 +1,7 @@
 package net.study.resume.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -160,7 +162,7 @@ public class EditProfileController {
 	}
 
 	@RequestMapping(value = "/edit/skills", method = RequestMethod.POST)
-	public String saveEditTechSkills(@ModelAttribute("skillForm") SkillForm form, BindingResult bindingResult,
+	public String saveEditTechSkills(@Valid @ModelAttribute("skillForm") SkillForm form, BindingResult bindingResult,
 			Model model) {
 		if (bindingResult.hasErrors()) {
 			return gotoSkillsJSP(model);
