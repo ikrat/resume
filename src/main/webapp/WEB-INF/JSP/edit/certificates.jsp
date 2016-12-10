@@ -10,7 +10,7 @@
 		<form:form action="/edit/certificates" method="post" commandName="certificateForm">
 			<div id="ui-block-container">
 				<c:forEach var="certificate" items="${certificateForm.certificates }" varStatus="status">
-					<resume:edit-certificate-block index="${status.index }" />
+					<resume:edit-certificate-block index="${status.index }" certificate="${certificate }"/>
 				</c:forEach>
 				<div class="row" align="center">
 					<div class="col-xs-12">

@@ -5,7 +5,7 @@
 
 <div class="panel panel-default">
 	<div class="panel-body">
-		<h4 class="data-header">Некоторые работодатели уделяют внимание на хобби кандидата</h4>
+		<h4 class="data-header" align="center">Некоторые работодатели уделяют внимание на хобби кандидата</h4>
 		<hr />
 		
 		<form:form action="/edit/hobby" method="post" commandName="hobbiesForm">
@@ -13,11 +13,6 @@
 				<c:forEach var="hobby" items="${hobbiesForm.items }" varStatus="status">
 					<resume:edit-hobbies-block index="${status.index }" hobby="${hobby }"/>
 				</c:forEach>
-			</div>
-			<div class="row">
-				<div class="col-xs-12">
-					<a href="javascript:void(0);">+ Добавить навык</a>
-				</div>
 			</div>
 			<hr />
 			<div class="row">

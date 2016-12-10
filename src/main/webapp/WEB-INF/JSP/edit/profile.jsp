@@ -3,20 +3,19 @@
 <%@ taglib prefix="form"   	uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="resume" 	tagdir="/WEB-INF/tags"%>
 
-<div class="panel panel-default">
+<div class="panel panel-primary">
 	<div class="panel-body">
-		<h4 class="data-header">Languages</h4>
-		<hr />
 		
-		<form:form action="/edit/languages" method="post" commandName="languagesForm">
+		<hr />
+		<form:form action="/edit/profile" method="post" commandName="profileForm">
 			<div id="ui-block-container">
-				<c:forEach var="language" items="${languagesForm.items }" varStatus="status">
-					<resume:edit-languages-block index="${status.index }" language="${language }"/>
+				<c:forEach var="profile" items="${profileForm }" varStatus="status">
+					<resume:edit-profile-block index="${status.index}" profile="${profile }" />
 				</c:forEach>
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
-					<a href="javascript:void(0);">+ Добавить язык</a>
+					<a href="javascript:void(0);">+ Добавить</a>
 				</div>
 			</div>
 			<hr />

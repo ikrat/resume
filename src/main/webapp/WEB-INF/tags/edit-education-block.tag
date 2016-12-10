@@ -14,32 +14,35 @@
 				<span aria-hidden="true">&times;</span>
 			</button>
 			<input type="hidden" name="items[${index }].id" value="${education.id }" />
-			<c:forEach var="education" items="${educationCategories }">
 				<div class="col-xs-4 col-sm-8 col-md-12">
 					<p><b>Развернутая специализация</b></p>
-					<input type="text" class="form-control" placeholder="${education.summary }">
+					<textarea name="items[${index }].summary" class="form-control">${education.summary }</textarea>
 				</div>
 				
 				<div class="col-xs-4 col-sm-4 col-md-6">
-					<p>Год поступления</p>
+					<br>
+					<p><b>Год поступления</b></p>
 					<input type="text" class="form-control" placeholder="${education.beginYear }">
 				</div>
 				
 				<div class="col-xs-4 col-sm-4 col-md-6">
-					<p>Год окончания</p>
+					<br>
+					<p><b>Год окончания</b></p>
 					<input type="text" class="form-control" placeholder="${education.finishYear }">
 				</div>
 				
 				<div class="col-xs-4 col-sm-4 col-md-6">
+					<br>
 					<p><b>Университет</b></p>
-					<input type="text" class="form-control" placeholder="${education.university }">
+					<textarea name="items[${index }].university" class="form-control" style="resize: none;">${education.university }</textarea>
 				</div>
 				
 				<div class="col-xs-4 col-sm-4 col-md-6">
-					<p><b>Факультет<b></b></p>
-					<input type="text" class="form-control" placeholder="${education.faculty }">
+					<br>
+					<p><b>Факультет</b></p>
+					<textarea name="items[${index }].faculty" class="form-control" style="resize: none;">${education.faculty }</textarea>
 				</div>
-			</c:forEach>
+			
 		</div>
 	</div>
 </div>

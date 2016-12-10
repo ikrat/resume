@@ -6,6 +6,7 @@
 <div class="panel panel-default">
 	<div class="panel-body">
 		<h4 class="data-header" align="center">Курсы повышения квалификации</h4>
+		<h5 class="data-body" align="center">(Упорядоченные по убыванию)</h5>
 		<hr />
 		<form:form action="/edit/courses" method="post" commandName="courseForm">
 			<div id="ui-block-container">

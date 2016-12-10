@@ -17,9 +17,16 @@ import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Email;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
+
+import net.study.resume.annotation.constraints.Adulthood;
+import net.study.resume.annotation.constraints.EnglishLanguage;
+import net.study.resume.annotation.constraints.PasswordStrength;
+import net.study.resume.annotation.constraints.Phone;
 
 @Entity
 @Table(name = "profile")
@@ -33,21 +40,29 @@ public class Profile extends AbstractEntity<Long> implements Serializable {
 	private Long id;
 
 	@Column(name = "birth_day")
+	@Adulthood
 	private Date birthDay;
 
 	@Column
+	@EnglishLanguage
 	private String city;
 
 	@Column
+	@EnglishLanguage
 	private String country;
 
 	@Column(name = "first_name", nullable = false, length = 50)
+	@EnglishLanguage
+	@NotNull
 	private String firstName;
 
 	@Column(name = "last_name", nullable = false, length = 50)
+	@EnglishLanguage
+	@NotNull
 	private String lastName;
 
 	@Column(length = 2147483647)
+	@EnglishLanguage
 	private String objective;
 
 	@Column(name = "large_photo", length = 255)
@@ -57,27 +72,37 @@ public class Profile extends AbstractEntity<Long> implements Serializable {
 	private String smallPhoto;
 
 	@Column(length = 20)
+	@Phone
 	private String phone;
 
 	@Column(length = 100)
+	@Email
 	private String email;
 	
 	@Column
+	@EnglishLanguage
 	private String info;
 
 	@Column(length = 2147483647)
+	@EnglishLanguage
 	private String summary;
 
 	@Column(nullable = false, length = 100)
+	@NotNull
+	@EnglishLanguage
 	private String uid;
 	
 	@Column(nullable = false, length = 100)
+	@PasswordStrength
+	@NotNull
 	private String password;
 	
 	@Column(nullable = false)
+	@NotNull
 	private boolean completed;
 	
 	@Column(insertable=false)
+	@NotNull
 	private Timestamp created;
 
 	@OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})

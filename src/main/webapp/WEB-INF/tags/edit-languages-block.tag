@@ -8,12 +8,10 @@
 
 <div id="ui-item-${index }" class="row ui-item skill-item">
 	<div class="col-xs-5 col-sm-4 col-md-2 form-group">
-		<input type="hidden" name="items[${index }].id" value="${language.id }" /> 
-		
-			<c:forEach var="language" items="${languageCategories }">
-				${language.name }
-			</c:forEach>
-			
+		<input type="hidden" name="items[${index }].name" value="${language.name }" /> 
+		<textarea name="items[${index }].name" class="form-control" style="resize: none;">${language.name }</textarea>
+		<textarea name="items[${index }].level" class="form-control" style="resize: none;">${language.level }</textarea>
+		<textarea name="items[${index }].type" class="form-control" style="resize: none;">${language.type }</textarea>
 		
 	</div>
 	<div class="col-xs-7 col-sm-8 col-md-10 value-container">

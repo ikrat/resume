@@ -17,6 +17,7 @@ import net.study.resume.form.EducationForm;
 import net.study.resume.form.HobbiesForm;
 import net.study.resume.form.LanguagesForm;
 import net.study.resume.form.PracticsForm;
+import net.study.resume.form.ProfileForm;
 import net.study.resume.form.SkillForm;
 import net.study.resume.repository.storage.CertificateCategoryRepository;
 import net.study.resume.repository.storage.CoursesCategoryRepository;
@@ -34,7 +35,13 @@ public class EditProfileController {
 	private SkillCategoryRepository skillCategoryRepository;
 
 	@Autowired
+	private ProfileRepository profileRepository;
+
+	@Autowired
 	private HobbiesCategoryRepository hobbiesCategoryRepository;
+
+	/*@Autowired
+	private CoursesCategoryRepository coursesCategoryRepository;
 
 	@Autowired
 	private EducationCategoryRepository educationCategoryRepository;
@@ -43,33 +50,27 @@ public class EditProfileController {
 	private CertificateCategoryRepository certificateCategoryRepository;
 
 	@Autowired
-	private ProfileRepository profileRepository;
-
-	@Autowired
-	private CoursesCategoryRepository coursesCategoryRepository;
-
-	@Autowired
 	private LanguageCategoryRepository languageCategoryRepository;
 	
 	@Autowired
-	private PracticCategoryRepository practicCategoryRepository;
+	private PracticCategoryRepository practicCategoryRepository;*/
 
-	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public String getEditProfile() {
-		return "edit";
+	@RequestMapping(value = "/edit/profile", method = RequestMethod.GET)
+	public String getEditProfile(@ModelAttribute("profileForm") ProfileForm form) {
+		return "edit/profile";
 	}
 
 	@RequestMapping(value = "/edit/practic", method = RequestMethod.GET)
 	public String getPractics(Model model) {
 		model.addAttribute("practicsForm", new PracticsForm(profileRepository.findOne(1L).getPractics()));
-		return gotoPracticsJSP(model);
+		return "edit/practic";
 	}
 
 	@RequestMapping(value = "/edit/practic", method = RequestMethod.POST)
-	public String savePractics(@ModelAttribute("practicsForm") PracticsForm form, BindingResult bindingResult,
+	public String savePractics(@Valid @ModelAttribute("practicsForm") PracticsForm form, BindingResult bindingResult,
 			Model model) {
 		if (bindingResult.hasErrors()) {
-			return gotoPracticsJSP(model);
+			return "edit/practic";
 		}
 		// TODO update languages
 		return "redirect:/emma-watson";
@@ -79,14 +80,14 @@ public class EditProfileController {
 	@RequestMapping(value = "/edit/languages", method = RequestMethod.GET)
 	public String getLanguages(Model model) {
 		model.addAttribute("languagesForm", new LanguagesForm(profileRepository.findOne(1L).getLanguages()));
-		return gotoLanguagesJSP(model);
+		return "edit/languages";
 	}
 
 	@RequestMapping(value = "/edit/languages", method = RequestMethod.POST)
-	public String saveLanguages(@ModelAttribute("languagesForm") LanguagesForm form, BindingResult bindingResult,
+	public String saveLanguages(@Valid @ModelAttribute("languagesForm") LanguagesForm form, BindingResult bindingResult,
 			Model model) {
 		if (bindingResult.hasErrors()) {
-			return gotoLanguagesJSP(model);
+			return "edit/languages";
 		}
 		// TODO update languages
 		return "redirect:/emma-watson";
@@ -99,7 +100,7 @@ public class EditProfileController {
 	}
 
 	@RequestMapping(value = "/edit/hobby", method = RequestMethod.POST)
-	public String saveHobbies(@ModelAttribute("hobbiesForm") HobbiesForm form, BindingResult bindingResult,
+	public String saveHobbies(@Valid @ModelAttribute("hobbiesForm") HobbiesForm form, BindingResult bindingResult,
 			Model model) {
 		if (bindingResult.hasErrors()) {
 			return gotoHobbiesJSP(model);
@@ -111,14 +112,14 @@ public class EditProfileController {
 	@RequestMapping(value = "/edit/education", method = RequestMethod.GET)
 	public String getEducation(Model model) {
 		model.addAttribute("educationForm", new EducationForm(profileRepository.findOne(1L).getEducations()));
-		return gotoEducationJSP(model);
+		return "edit/education";
 	}
 
 	@RequestMapping(value = "/edit/education", method = RequestMethod.POST)
-	public String saveEducation(@ModelAttribute("educationForm") EducationForm form, BindingResult bindingResult,
+	public String saveEducation(@Valid @ModelAttribute("educationForm") EducationForm form, BindingResult bindingResult,
 			Model model) {
 		if (bindingResult.hasErrors()) {
-			return gotoEducationJSP(model);
+			return "edit/education";
 		}
 		// TODO update education
 		return "redirect:/emma-watson";
@@ -127,13 +128,13 @@ public class EditProfileController {
 	@RequestMapping(value = "/edit/courses", method = RequestMethod.GET)
 	public String getCourses(Model model) {
 		model.addAttribute("courseForm", new CourseForm(profileRepository.findOne(1L).getCourses()));
-		return gotoCoursesJSP(model);
+		return "edit/courses";
 	}
 
 	@RequestMapping(value = "/edit/courses", method = RequestMethod.POST)
-	public String saveCourses(@ModelAttribute("courseForm") CourseForm form, BindingResult bindingResult, Model model) {
+	public String saveCourses(@Valid @ModelAttribute("courseForm") CourseForm form, BindingResult bindingResult, Model model) {
 		if (bindingResult.hasErrors()) {
-			return gotoCoursesJSP(model);
+			return "edit/courses";
 		}
 		// TODO update courses
 		return "redirect:/emma-watson";
@@ -142,14 +143,14 @@ public class EditProfileController {
 	@RequestMapping(value = "/edit/certificates", method = RequestMethod.GET)
 	public String getCertificates(Model model) {
 		model.addAttribute("certificateForm", new CertificateForm(profileRepository.findOne(1L).getCertificates()));
-		return gotoCertificatesJSP(model);
+		return "/edit/certificates";
 	}
 
 	@RequestMapping(value = "/edit/certificates", method = RequestMethod.POST)
-	public String saveCertificates(@ModelAttribute("certificateForm") CertificateForm form, BindingResult bindingResult,
+	public String saveCertificates(@Valid @ModelAttribute("certificateForm") CertificateForm form, BindingResult bindingResult,
 			Model model) {
 		if (bindingResult.hasErrors()) {
-			return gotoCertificatesJSP(model);
+			return "/edit/certificates";
 		}
 		// TODO update certificates
 		return "redirect:/emma-watson";
@@ -170,20 +171,22 @@ public class EditProfileController {
 		// TODO update skills
 		return "redirect:/emma-watson";
 	}
+	
+	private String gotoSkillsJSP(Model model) {
+		model.addAttribute("skillCategories", skillCategoryRepository.findAll(new Sort("id")));
+		return "edit/skills";
+	}
 
+
+	
 	private String gotoHobbiesJSP(Model model) {
 		model.addAttribute("hobbiesCategories", hobbiesCategoryRepository.findAll(new Sort("name")));
 		return "edit/hobby";
 	}
-
+	/*
 	private String gotoCertificatesJSP(Model model) {
 		model.addAttribute("certificateCategories", certificateCategoryRepository.findAll(new Sort("id")));
 		return "edit/certificates";
-	}
-
-	private String gotoSkillsJSP(Model model) {
-		model.addAttribute("skillCategories", skillCategoryRepository.findAll(new Sort("id")));
-		return "edit/skills";
 	}
 
 	private String gotoCoursesJSP(Model model) {
@@ -204,5 +207,5 @@ public class EditProfileController {
 	private String gotoPracticsJSP(Model model) {
 		model.addAttribute("practicsCategories", practicCategoryRepository.findAll(new Sort("id")));
 		return "edit/practic";
-	}
+	}*/
 }

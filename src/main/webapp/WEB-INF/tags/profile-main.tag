@@ -8,7 +8,7 @@
 		<a href="/edit"><img class="img-responsive photo" src="${profile.largePhoto}" alt="photo"></a>
 	</c:if>
 	<h1 class="text-center">
-		<a style="color: black;" href="/edit">${profile.fullName}</a>
+		<a style="color: black;" href="/edit/profile">${profile.fullName}</a>
 	</h1>
 	<c:if test="${profile.country != null || profile.city != null }">
 		<h6 class="text-center">

@@ -1,6 +1,10 @@
 <%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:if test="${profile.practics == null }">
+	<h3>No any practics.</h3>
+</c:if>
+
 <c:if test="${profile.practics != null }">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -20,7 +24,12 @@
 							<div class="timeline-heading">
 								<h4 class="timeline-title">${practic.position } at ${practic.company }</h4>
 								<p>
-									<small class="dates"> <i class="fa fa-calendar">${practic.beginDate }</i> <strong class="label label-danger">Current</strong>
+									<small class="dates"> <i class="fa fa-calendar">${practic.beginDate }</i> 
+									<c:if test="${practic.finishDate != null }">- ${practic.finishDate }</c:if>
+									<c:if test="${practic.finishDate == null}">
+										<strong class="label label-danger">Not finish yet</strong>
+									</c:if>
+									 
 									</small>
 								</p>
 							</div>

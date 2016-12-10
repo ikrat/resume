@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import net.study.resume.annotation.constraints.EnglishLanguage;
 
 @Entity
 @Table(name="certificate")
@@ -19,15 +22,20 @@ public class Certificate extends AbstractEntity<Long> implements Serializable, P
 	@Id
 	@SequenceGenerator(name="CERTIFICATE_ID_GENERATOR", sequenceName="CERTIFICATE_SEQ", allocationSize=1)
 	@Column(unique=true, nullable=false)
+	@NotNull
 	private Long id;
 
 	@Column(name="large_url", nullable=false, length=255)
+	@NotNull
 	private String largeUrl;
 	
 	@Column(name="small_url", nullable=false, length=255)
+	@NotNull
 	private String smallUrl;
 	
 	@Column(nullable=false, length=255)
+	@EnglishLanguage
+	@NotNull
 	private String name;
 	
 	@ManyToOne(fetch=FetchType.LAZY)

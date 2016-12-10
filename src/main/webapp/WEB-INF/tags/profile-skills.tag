@@ -1,6 +1,7 @@
 <%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <div class="panel panel-primary">
 	<div class="panel-heading">
 		<h3 class="panel-title">

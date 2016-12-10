@@ -7,18 +7,12 @@
 <%@ attribute name="certificate" required="false" type="net.study.resume.entity.Certificate"%>
 
 
-<div id="ui-item-${index }" class="row ui-item skill-item">
-	<div class="panel panel-primary certificates">
-		<div class="panel-body">
-			<c:forEach items="${certificateCategories }" var="certificate">
-				<a data-title="Certificate" href="${certificate.largeUrl }" class="thumbnail certificate-link"> <img alt="Certificate"
-					src="${certificate.smallUrl }" class="img-responsive"> <span>${certificate.name }</span>
-				</a>
-			</c:forEach>
-		</div>
-	</div>
-
+<div id="ui-item-${index }" class="row ui-item skill-item" align="center">
+	<input type="hidden" name="certificates[${index }].name" value="${certificate.name }" /> 
 	<button type="button" class="close" onclick="$('#ui-item-${index }').remove();">
 		<span aria-hidden="true">&times;</span>
 	</button>
+		<a data-title="Certificate" href="${certificate.largeUrl }" class="thumbnail certificate-link" style="width: 170px;"> 
+			<img alt="Certificate" src="${certificate.smallUrl }" class="img-responsive"> <span>${certificate.name }</span>
+		</a>
 </div>

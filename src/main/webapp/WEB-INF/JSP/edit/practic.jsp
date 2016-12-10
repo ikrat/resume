@@ -3,9 +3,10 @@
 <%@ taglib prefix="form"   	uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="resume" 	tagdir="/WEB-INF/tags"%>
 
-<div class="panel panel-default">
+<div class="panel panel-primary">
 	<div class="panel-body">
-		<h4 class="data-header" align="center">Курсы повышения квалификации</h4>
+		<h4 class="data-header" align="center">Практический опыт</h4>
+		<h5 class="data-body" align="center">(Упорядоченные по убыванию)</h5>
 		<hr />
 		<form:form action="/edit/practic" method="post" commandName="practicsForm">
 			<div id="ui-block-container">
@@ -15,7 +16,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
-					<a href="javascript:void(0);">+ Добавить practic</a>
+					<a href="javascript:void(0);">+ Добавить</a>
 				</div>
 			</div>
 			<hr />

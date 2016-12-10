@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.RepositoryDefinition;
 
-import net.study.resume.entity.Hobby;
+import net.study.resume.entity.HobbyName;
 
-@RepositoryDefinition(domainClass=Hobby.class, idClass=Long.class)
+@RepositoryDefinition(domainClass=HobbyName.class, idClass=Long.class)
 public interface HobbiesCategoryRepository {
 
-	List<Hobby> findAll(Sort sort);
+	List<HobbyName> findAll(Sort sort);
 }

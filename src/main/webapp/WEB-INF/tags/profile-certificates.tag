@@ -1,7 +1,7 @@
 <%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:if test="${profile.certificates != null }">
+
 	<div class="panel panel-primary certificates">
 		<div class="panel-heading">
 			<h3 class="panel-title">
@@ -17,4 +17,3 @@
 			</c:forEach>
 		</div>
 	</div>
-</c:if>

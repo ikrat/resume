@@ -19,7 +19,12 @@
 							<div class="timeline-heading">
 								<h4 class="timeline-title">${course.name } at ${course.school }</h4>
 								<p>
-									<i class="fa fa-calendar"></i><small class="dates">${finishYear } </small>
+								<c:if test="${course.finishDate != null }">
+									<i class="fa fa-calendar"><b> Finish Date:</b></i><small class="dates"> ${course.finishDate } </small>
+								</c:if>
+								<c:if test="${course.finishDate == null }">
+									<i class="fa fa-calendar"><b> Finish Date:</b></i><strong class="label label-danger">Not finish yet</strong>
+								</c:if>
 								</p>
 							</div>
 						</div>
