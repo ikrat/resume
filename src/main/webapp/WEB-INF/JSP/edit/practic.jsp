@@ -3,6 +3,7 @@
 <%@ taglib prefix="form"   	uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="resume" 	tagdir="/WEB-INF/tags"%>
 
+<resume:edit-navbar />
 <div class="panel panel-primary">
 	<div class="panel-body">
 		<h4 class="data-header" align="center">Практический опыт</h4>

@@ -3,9 +3,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="resume" tagdir="/WEB-INF/tags"%>
 
-<div class="panel panel-default">
+<resume:edit-navbar />
+<div class="panel panel-primary">
 	<div class="panel-body">
-		<h4 class="data-header" align="center">Education</h4>
+		<h4 class="data-header" align="center">Образование</h4>
+		<h5 class="data-body" align="center">(Упорядоченные по убыванию)</h5>
 		<hr />
 		<form:form action="/edit/education" method="post" commandName="educationForm">
 			<div id="ui-block-container">

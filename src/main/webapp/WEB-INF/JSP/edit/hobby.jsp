@@ -3,7 +3,8 @@
 <%@ taglib prefix="form"   	uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="resume" 	tagdir="/WEB-INF/tags"%>
 
-<div class="panel panel-default">
+<resume:edit-navbar />
+<div class="panel panel-primary">
 	<div class="panel-body">
 		<h4 class="data-header" align="center">Некоторые работодатели уделяют внимание на хобби кандидата</h4>
 		<hr />

@@ -115,7 +115,11 @@ select,
 textarea {
   margin: 0;
   font: inherit;
-  color: inherit;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border-radius: 4px;
+  
 }
 button {
   overflow: visible;
@@ -1093,7 +1097,7 @@ button,
 select,
 textarea {
   font-family: inherit;
-  font-size: 20px;
+  font-size: 14px;
   line-height: inherit;
 }
 a {
@@ -1145,8 +1149,8 @@ img {
   border-radius: 50%;
 }
 hr {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   border: 0;
   border-top: 1px solid #eee;
 }
@@ -1478,7 +1482,7 @@ abbr[data-original-title] {
 blockquote {
   padding: 10px 20px;
   margin: 0 0 20px;
-  font-size: 17.5px;
+  font-size: 16.5px;
   border-left: 5px solid #eee;
 }
 blockquote p:last-child,

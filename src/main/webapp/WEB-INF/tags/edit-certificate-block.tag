@@ -7,8 +7,8 @@
 <%@ attribute name="certificate" required="false" type="net.study.resume.entity.Certificate"%>
 
 
-<div id="ui-item-${index }" class="row ui-item skill-item" align="center">
-	<input type="hidden" name="certificates[${index }].name" value="${certificate.name }" /> 
+<div id="ui-item-${index }" class="row ui-item skill-item">
+	<input type="hidden" name="certificates[${index }].id" value="${certificate.id }" /> 
 	<button type="button" class="close" onclick="$('#ui-item-${index }').remove();">
 		<span aria-hidden="true">&times;</span>
 	</button>

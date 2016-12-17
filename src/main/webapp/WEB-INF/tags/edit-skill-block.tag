@@ -11,7 +11,7 @@
 		<input type="hidden" name="items[${index }].id" value="${skill.id }" /> 
 		<select name="items[${index }].category" class="form-control">
 			<c:forEach var="category" items="${skillCategories }">
-			<option value="${category.category }" ${category.category == skill.category ? ' selected="selected"' : ''}>${category.category }</option>
+				<option value="${category.category }" ${category.category == skill.category ? ' selected="selected"' : ''}>${category.category }</option>
 			</c:forEach>
 		</select>
 	</div>
@@ -19,7 +19,7 @@
 		<button type="button" class="close" onclick="$('#ui-item-${index }').remove();">
 			<span aria-hidden="true">&times;</span>
 		</button>
-		<textarea name="items[${index }].value" class="form-control pull-right" required="required" rows="2">${skill.value }</textarea>
+		<textarea name="items[${index }].value" class="form-control-skills pull-right" required="required" rows="2">${skill.value }</textarea>
 	</div>
 </div>
 <div class="row skill-delim" >

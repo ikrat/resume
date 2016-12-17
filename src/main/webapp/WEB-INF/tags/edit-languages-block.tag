@@ -18,5 +18,5 @@
 		<button type="button" class="close" onclick="$('#ui-item-${index }').remove();">
 			<span aria-hidden="true">&times;</span>
 		</button>
-		</div>
+	</div>
 </div>

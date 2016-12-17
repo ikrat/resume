@@ -16,19 +16,19 @@
 			<input type="hidden" name="items[${index }].id" value="${education.id }" />
 				<div class="col-xs-4 col-sm-8 col-md-12">
 					<p><b>Развернутая специализация</b></p>
-					<textarea name="items[${index }].summary" class="form-control">${education.summary }</textarea>
+					<textarea name="items[${index }].summary" class="form-control-skills" style="resize: none;">${education.summary }</textarea>
 				</div>
 				
 				<div class="col-xs-4 col-sm-4 col-md-6">
 					<br>
 					<p><b>Год поступления</b></p>
-					<input type="text" class="form-control" placeholder="${education.beginYear }">
+					<input name="items[${index }].beginYear" type="text" class="form-control" placeholder="${education.beginYear }">
 				</div>
 				
 				<div class="col-xs-4 col-sm-4 col-md-6">
 					<br>
 					<p><b>Год окончания</b></p>
-					<input type="text" class="form-control" placeholder="${education.finishYear }">
+					<input name="items[${index }].finishYear" type="text" class="form-control" placeholder="${education.finishYear }">
 				</div>
 				
 				<div class="col-xs-4 col-sm-4 col-md-6">

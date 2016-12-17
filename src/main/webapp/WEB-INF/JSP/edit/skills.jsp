@@ -3,9 +3,10 @@
 <%@ taglib prefix="form"   	uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="resume" 	tagdir="/WEB-INF/tags"%>
 
-<div class="panel panel-default">
+<resume:edit-navbar />
+<div class="panel panel-primary">
 	<div class="panel-body">
-		<h4 class="data-header">Технические навыки во фреймворках и технологиях</h4>
+		<h4 class="data-header" align="center">Технические навыки во фреймворках и технологиях</h4>
 		<hr />
 		<div class="row" style="margin-bottom: 20px;">
 			<div class="col-xs-5 col-sm-4 col-md-2 text-center"><strong>Категория</strong></div>
