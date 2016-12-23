@@ -2,6 +2,7 @@
 
 <link rel="stylesheet" href="/static/css/bootstrap.css">
 <link rel="stylesheet" href="/static/css/bootstrap-theme.css">
+<link rel="stylesheet" href="/static/css/bootstrap-slider.css">
 <link rel="stylesheet" href="/static/css/font-awesome.css">
 <link rel="stylesheet" href="/static/css/timeline.css">
 <link rel="stylesheet" href="/static/css/app.css">

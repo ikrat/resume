@@ -2,6 +2,7 @@ package net.study.resume.form;
 
 import java.io.Serializable;
 
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -60,5 +61,8 @@ public class SignUpForm implements Serializable{
 		this.confirmPassword = confirmPassword;
 	}
 	
-	
+	@Transient
+	public String getFullName() {
+		return firstName + " " + lastName;
+	}
 }

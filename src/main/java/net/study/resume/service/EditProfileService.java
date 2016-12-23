@@ -56,5 +56,7 @@ public interface EditProfileService {
 	
 	void updateContacts (long idProfile, Contacts contactsForm);
 	
+	void updateInfo(long idProfile, Profile profileForm);
+	
 	//void updateCertificates(long idProfile, List<Certificate> certificates);
 }

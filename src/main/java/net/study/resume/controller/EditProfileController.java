@@ -3,6 +3,7 @@ package net.study.resume.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import net.study.resume.form.LanguagesForm;
 import net.study.resume.form.PracticsForm;
 import net.study.resume.form.ProfileForm;
 import net.study.resume.form.SkillForm;
+import net.study.resume.repository.storage.HobbiesCategoryRepository;
 import net.study.resume.repository.storage.ProfileRepository;
 import net.study.resume.service.EditProfileService;
 import net.study.resume.util.SecurityUtil;
@@ -31,6 +33,9 @@ public class EditProfileController {
 	
 	@Autowired
 	private ProfileRepository profileRepository;
+	
+	@Autowired
+	private HobbiesCategoryRepository hobbiesCategoryRepository;
 
 		
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -46,6 +51,22 @@ public class EditProfileController {
 		}
 		editProfileService.updateProfile(SecurityUtil.getCurrentIdProfile(), form.getProfile());
 		return "redirect:/edit/contacts";
+	}
+	
+	@RequestMapping(value="/edit/info", method=RequestMethod.GET)
+	public String getInfo(Model model){
+		model.addAttribute("profileForm", new ProfileForm(editProfileService.profile(SecurityUtil.getCurrentIdProfile())));
+		return "edit/info";
+		
+	}
+	
+	@RequestMapping(value="/edit/info", method=RequestMethod.POST)
+	public String saveInfo(@ModelAttribute("profileForm") ProfileForm form, BindingResult bindingResult, Model model){
+		if(bindingResult.hasErrors()){
+			return "edit/info";
+		}
+		editProfileService.updateInfo(SecurityUtil.getCurrentIdProfile(), form.getProfile());
+		return "redirect:/chris-hemsworth";
 	}
 	
 	@RequestMapping(value="/edit/contacts", method=RequestMethod.GET)
@@ -182,7 +203,8 @@ public class EditProfileController {
 	}
 	
 	private String gotoHobbiesJSP(Model model) {
-		model.addAttribute("hobbiesCategories", editProfileService.listHobbiesName());
+		model.addAttribute("hobbiesCategories", hobbiesCategoryRepository.findAll(new Sort("id")));
+		model.addAttribute("profileForm", new ProfileForm(editProfileService.profile(SecurityUtil.getCurrentIdProfile())));
 		return "edit/hobby";
 	}
 	

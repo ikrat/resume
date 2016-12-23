@@ -8,7 +8,6 @@
 	<div class="panel-body">
 		<h4 class="data-header" align="center">Некоторые работодатели уделяют внимание на хобби кандидата</h4>
 		<hr />
-		
 		<form:form action="/edit/hobby" method="post" commandName="hobbiesForm">
 			<div id="ui-block-container">
 				<c:forEach var="hobby" items="${hobbiesForm.items }" varStatus="status">

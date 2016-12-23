@@ -9,12 +9,9 @@
 <div class="panel panel-primary">
 	<div class="panel-body">
 		<form:form action="/edit" method="post" commandName="profileForm">
-			<br>
 			<div class="data-header" align="center">
-				<textarea rows="1" cols="20" name="profile.firstName" required="required" style="resize: none;" placeholder="First Name">${profileForm.profile.firstName }</textarea>
-				<textarea rows="1" cols="20" name="profile.lastName" required="required" style="resize: none;" placeholder="Second Name">${profileForm.profile.lastName }</textarea>
+				<h2 class="text">${profileForm.profile.fullName }</h2>
 			</div>
-			<h5 class="data-body" align="center">(Укажите Ваше настоящее имя)</h5>
 			<hr />
 			<div class="container-fluid">
 				<div class="row">

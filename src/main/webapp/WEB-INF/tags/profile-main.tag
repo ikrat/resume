@@ -8,7 +8,7 @@
 		<a href="/edit"><img class="img-responsive photo" src="${profile.largePhoto}" alt="photo"></a>
 	</c:if>
 	<h1 class="text-center">
-		<a style="color: black;" href="/edit">${profile.fullName}</a>
+		${profile.fullName}
 	</h1>
 	<c:if test="${profile.country != null || profile.city != null }">
 		<h6 class="text-center">
@@ -44,7 +44,7 @@
 			<a target="_blank" class="list-group-item" href="${profile.contacts.github }"><i class="fa fa-github"></i>${profile.contacts.github }</a>
 		</c:if>
 		<c:if test="${profile.contacts.stackoverflow != null }">
-			<a target="_blank" class="list-group-item" href="${profile.contacts.stackoverflow }"><i class="fa fa-stack-overflow"></i>${profile.contacts.stackoverflow }</a>
+			<a target="_blank" class="list-group-item" href="${profile.contacts.stackoverflow }"><i class="fa fa-stack-overflow"></i>${profile.getContacts().stackoverflow }</a>
 		</c:if>
 	</div>
 </div>

@@ -234,6 +234,15 @@ public class EditProfileServiceImpl implements EditProfileService {
 		profileRepository.save(profile);
 	}
 
+	@Override
+	@Transactional
+	public void updateInfo(long idProfile, Profile profileForm) {
+		Profile profile = profileRepository.findOne(idProfile);
+		profile.setInfo(profileForm.getInfo());
+		profileRepository.save(profile);
+		
+	}
+
 	/*private void registerUpdateIndexAccountIfTransactionSuccess(final long idProfile, final Profile prof) {
 		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
 			@Override

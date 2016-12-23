@@ -7,7 +7,7 @@
 <%@ attribute name="education" required="false" type="net.study.resume.entity.Education"%>
 
 
-<div id="ui-item-${index }" class="row ui-item education-item">
+<div id="ui-item-${index }" class="row ui-item skill-item">
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<button type="button" class="close" onclick="$('#ui-item-${index }').remove();">
