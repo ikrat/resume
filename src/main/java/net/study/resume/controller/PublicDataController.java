@@ -97,4 +97,12 @@ public class PublicDataController {
 		model.addAttribute("profiles", profiles.getContent());		
 		return "fragment/profile-items";
 	}
+	
+	@RequestMapping(value="/search", method=RequestMethod.POST)
+	public String search(@ModelAttribute("query")String query, Model model, Pageable pageable) {
+		Page<Profile> profiles = findProfileService.findBySearchQuery(query, new PageRequest(0, Constants.MAX_PROFILES_PER_PAGE, new Sort("id")));
+		model.addAttribute("profiles", profiles.getContent());
+		model.addAttribute("page", profiles);
+		return "search";
+	}
 }

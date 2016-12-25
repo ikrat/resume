@@ -22,6 +22,9 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
+import org.springframework.data.elasticsearch.annotations.Document;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import net.study.resume.annotation.constraints.Adulthood;
 import net.study.resume.annotation.constraints.EnglishLanguage;
@@ -30,6 +33,7 @@ import net.study.resume.annotation.constraints.Phone;
 
 @Entity
 @Table(name = "profile")
+@Document(indexName="profile")
 public class Profile extends AbstractEntity<Long> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -66,6 +70,7 @@ public class Profile extends AbstractEntity<Long> implements Serializable {
 	private String objective;
 
 	@Column(name = "large_photo", length = 255)
+	@JsonIgnore
 	private String largePhoto;
 
 	@Column(name = "small_photo", length = 255)
@@ -73,10 +78,12 @@ public class Profile extends AbstractEntity<Long> implements Serializable {
 
 	@Column(length = 20)
 	@Phone
+	@JsonIgnore
 	private String phone;
 
 	@Column(length = 100)
 	@Email
+	@JsonIgnore
 	private String email;
 	
 	@Column
@@ -95,14 +102,17 @@ public class Profile extends AbstractEntity<Long> implements Serializable {
 	@Column(nullable = false, length = 100)
 	@PasswordStrength
 	@NotNull
+	@JsonIgnore
 	private String password;
 	
 	@Column(nullable = false)
 	@NotNull
+	@JsonIgnore
 	private boolean completed;
 	
 	@Column(insertable=false)
 	@NotNull
+	@JsonIgnore
 	private Timestamp created;
 
 	@OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
@@ -110,10 +120,12 @@ public class Profile extends AbstractEntity<Long> implements Serializable {
 
 	@OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
 	@OrderBy("finishYear DESC, beginYear DESC, id DESC")
+	@JsonIgnore
 	private List<Education> educations;
 
 	@OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
 	@OrderBy("name ASC")
+	@JsonIgnore
 	private List<Hobby> hobbies;
 
 	@OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})

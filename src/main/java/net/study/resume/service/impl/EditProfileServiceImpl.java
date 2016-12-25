@@ -1,5 +1,6 @@
 package net.study.resume.service.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationAdapter;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import net.study.resume.entity.Contacts;
 import net.study.resume.entity.Course;
@@ -23,6 +26,7 @@ import net.study.resume.entity.Skill;
 import net.study.resume.entity.SkillCategory;
 import net.study.resume.exception.CantCompleteClientRequestException;
 import net.study.resume.form.SignUpForm;
+import net.study.resume.repository.search.ProfileSearchRepository;
 import net.study.resume.repository.storage.HobbiesCategoryRepository;
 import net.study.resume.repository.storage.ProfileRepository;
 import net.study.resume.repository.storage.SkillCategoryRepository;
@@ -30,11 +34,12 @@ import net.study.resume.service.EditProfileService;
 import net.study.resume.util.DataUtil;
 
 @Service
+@SuppressWarnings("unchecked")
 public class EditProfileServiceImpl implements EditProfileService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(EditProfileServiceImpl.class);
 
-	/*@Autowired
-	private ProfileSearchRepository profileSearchRepository;*/
+	@Autowired
+	private ProfileSearchRepository profileSearchRepository;
 	
 	@Autowired
 	private ProfileRepository profileRepository;
@@ -65,9 +70,26 @@ public class EditProfileServiceImpl implements EditProfileService {
 		profile.setPassword(signUpForm.getPassword());
 		profile.setCompleted(false);
 		profileRepository.save(profile);
+		registerCreateIndexProfileIfTransactionSuccess(profile);
 		return profile;
 	}
 	
+	private void registerCreateIndexProfileIfTransactionSuccess(final Profile profile) {
+		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+			@Override
+			public void afterCommit() {
+				LOGGER.info("New profile created: {}", profile.getUid());
+				profile.setCertificates(Collections.EMPTY_LIST);
+				profile.setPractics(Collections.EMPTY_LIST);
+				profile.setLanguages(Collections.EMPTY_LIST);
+				profile.setSkills(Collections.EMPTY_LIST);
+				profile.setCourses(Collections.EMPTY_LIST);
+				profileSearchRepository.save(profile);
+				LOGGER.info("New profile index created: {}", profile.getUid());
+			}
+		});
+	}
+
 	private String generateProfileUid(SignUpForm signUpForm) throws CantCompleteClientRequestException {
 		String baseUid = DataUtil.generateProfileUid(signUpForm);
 		String uid = baseUid;
@@ -79,6 +101,8 @@ public class EditProfileServiceImpl implements EditProfileService {
 		}
 		return uid;
 	}
+	
+	
 	
 	@Override
 	public List<Skill> listSkills(long idProfile) {
@@ -100,7 +124,24 @@ public class EditProfileServiceImpl implements EditProfileService {
 		} else {
 			profile.setSkills(updateData);
 			profileRepository.save(profile);
+			registerUpdateIndexProfileSkillsIfTransactionSuccess(idProfile, updateData);
 		}
+	}
+
+	private void registerUpdateIndexProfileSkillsIfTransactionSuccess(final long idProfile, final List<Skill> updateData) {
+		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+			public void afterCommit() {
+				LOGGER.info("Profile skills updated");
+				updateIndexProfileSkills(idProfile, updateData);
+			}
+		});
+	}
+	
+	private void updateIndexProfileSkills(long idProfile, List<Skill> updateData) {
+		Profile profile = profileSearchRepository.findOne(idProfile);
+		profile.setSkills(updateData);
+		profileSearchRepository.save(profile);
+		LOGGER.info("Profile skills index updated");
 		
 	}
 

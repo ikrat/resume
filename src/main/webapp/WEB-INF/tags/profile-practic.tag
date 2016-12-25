@@ -24,7 +24,7 @@
 							</div>
 							<div class="timeline-panel">
 								<div class="timeline-heading">
-									<h4 class="timeline-title">${practic.position }at${practic.company }</h4>
+									<h4 class="timeline-title">${practic.position } at ${practic.company }</h4>
 									<p>
 										<small class="dates"> <i class="fa fa-calendar">${practic.beginDate }</i> <c:if test="${practic.finishDate != null }">- ${practic.finishDate }</c:if>
 											<c:if test="${practic.finishDate == null}">
