@@ -66,6 +66,7 @@ public class ResumeWebApplicationInitializer implements WebApplicationInitialize
 			@Override
 			protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
 				builder.addDecoratorPath("/*", "/WEB-INF/template/page-template.jsp");
+				builder.addDecoratorPath("/fragment/*", "/WEB-INF/template/fragment-template.jsp");
 			}
 		};
 	}
