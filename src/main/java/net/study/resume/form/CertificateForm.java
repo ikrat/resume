@@ -9,24 +9,23 @@ import net.study.resume.entity.Certificate;
 public class CertificateForm implements Serializable{
 	private static final long serialVersionUID = 2422367977327843525L;
 
-	private List<Certificate> certificates = new ArrayList<>();
+	private List<Certificate> items = new ArrayList<>();
 
 	public CertificateForm() {
 		super();
 	}
 
-	public CertificateForm(List<Certificate> certificates) {
+	public CertificateForm(List<Certificate> items) {
 		super();
-		this.certificates = certificates;
+		this.items = items;
 	}
 
-	public List<Certificate> getCertificates() {
-		return certificates;
+	public List<Certificate> getItems() {
+		return items;
 	}
 
-	public void setCertificates(List<Certificate> certificates) {
-		this.certificates = certificates;
+	public void setItems(List<Certificate> items) {
+		this.items = items;
 	}
-	
-	
+
 }

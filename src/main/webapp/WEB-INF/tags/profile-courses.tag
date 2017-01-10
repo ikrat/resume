@@ -11,7 +11,7 @@
 	<div class="panel-body">
 		<c:choose>
 			<c:when test="${profile.courses.size() == 0 }">
-				<strong>No any data.</strong>
+				<div align="center">No any data.</div>
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${profile.courses }" var="course">
@@ -22,7 +22,7 @@
 							</div>
 							<div class="timeline-panel">
 								<div class="timeline-heading">
-									<h4 class="timeline-title">${course.name }at ${course.school }</h4>
+									<h4 class="timeline-title">${course.name } at$ {course.school }</h4>
 									<p>
 										<c:if test="${course.finishDate != null }">
 											<i class="fa fa-calendar"><b> Finish Date:</b></i>

@@ -2,6 +2,7 @@ package net.study.resume.service;
 
 import java.util.List;
 
+import net.study.resume.entity.Certificate;
 import net.study.resume.entity.Contacts;
 import net.study.resume.entity.Course;
 import net.study.resume.entity.Education;
@@ -38,7 +39,7 @@ public interface EditProfileService {
 	
 	Contacts contacts (long idProfile);
 	
-	//List<Certificate> listCertificates(long idProfile);
+	List<Certificate> listCertificates(long idProfile);
 	
 	void updatePractics(long idProfile, List<Practic> practics);
 	
@@ -54,9 +55,9 @@ public interface EditProfileService {
 	
 	void updateProfile (long idProfile, Profile profileForm);
 	
-	void updateContacts (long idProfile, Contacts contactsForm);
+	void updateContacts (long idProfile, Contacts contacts);
 	
 	void updateInfo(long idProfile, Profile profileForm);
 	
-	//void updateCertificates(long idProfile, List<Certificate> certificates);
+	void updateCertificates(long idProfile, List<Certificate> certificates);
 }

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+import net.study.resume.entity.Certificate;
 import net.study.resume.entity.Contacts;
 import net.study.resume.entity.Course;
 import net.study.resume.entity.Education;
@@ -59,7 +60,7 @@ public class EditProfileServiceImpl implements EditProfileService {
 	@Value("${generate.uid.max.try.count}")
 	private int maxTryCountToGenerateUid;
 	
-	
+//Profile create
 	@Override
 	@Transactional
 	public Profile createNewProfile(SignUpForm signUpForm) {
@@ -104,11 +105,12 @@ public class EditProfileServiceImpl implements EditProfileService {
 	
 	
 	
+//Skills	
 	@Override
 	public List<Skill> listSkills(long idProfile) {
 		return profileRepository.findOne(idProfile).getSkills();
 	}
-	
+
 	@Override
 	public List<SkillCategory> listSkillCategories() {
 		return skillCategoryRepository.findAll(new Sort("id"));
@@ -130,6 +132,7 @@ public class EditProfileServiceImpl implements EditProfileService {
 
 	private void registerUpdateIndexProfileSkillsIfTransactionSuccess(final long idProfile, final List<Skill> updateData) {
 		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+			@Override
 			public void afterCommit() {
 				LOGGER.info("Profile skills updated");
 				updateIndexProfileSkills(idProfile, updateData);
@@ -142,9 +145,9 @@ public class EditProfileServiceImpl implements EditProfileService {
 		profile.setSkills(updateData);
 		profileSearchRepository.save(profile);
 		LOGGER.info("Profile skills index updated");
-		
 	}
 
+//Hobby	
 	@Override
 	public List<Hobby> listHobbies(long idProfile) {
 		return profileRepository.findOne(idProfile).getHobbies();
@@ -164,9 +167,29 @@ public class EditProfileServiceImpl implements EditProfileService {
 		} else {
 			profile.setHobbies(updateData);
 			profileRepository.save(profile);
+			registerUpdateIndexProfileHobbiesIfTransactionSuccess(idProfile, updateData);
 		}
 	}
+	
+	private void registerUpdateIndexProfileHobbiesIfTransactionSuccess(final long idProfile, final List<Hobby> updateData) {
+		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+			@Override
+			public void afterCommit() {
+				LOGGER.info("Profile hobbies updated");
+				updateIndexProfileHobbies(idProfile, updateData);
+			}
+		});
+	}
+	
+	private void updateIndexProfileHobbies(long idProfile, List<Hobby> updateData) {
+		Profile profile = profileSearchRepository.findOne(idProfile);
+		profile.setHobbies(updateData);
+		profileSearchRepository.save(profile);
+		LOGGER.info("Profile hobbies index updated");
+	}
 
+	
+//Practice	
 	@Override
 	public List<Practic> listPractics(long idProfile) {
 		return profileRepository.findOne(idProfile).getPractics();
@@ -181,10 +204,29 @@ public class EditProfileServiceImpl implements EditProfileService {
 		} else {
 			profile.setPractics(practics);
 			profileRepository.save(profile);
+			registerUpdateIndexProfilePracticsIfTransactionSuccess(idProfile, practics);
 		}
-		
+	}
+	
+	private void registerUpdateIndexProfilePracticsIfTransactionSuccess(final long idProfile, final List<Practic> updateData) {
+		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+			@Override
+			public void afterCommit() {
+				LOGGER.info("Profile practice updated");
+				updateIndexProfilePractice(idProfile, updateData);
+			}
+		});
+	}
+	
+	private void updateIndexProfilePractice(long idProfile, List<Practic> updateData) {
+		Profile profile = profileSearchRepository.findOne(idProfile);
+		profile.setPractics(updateData);
+		profileSearchRepository.save(profile);
+		LOGGER.info("Profile practice index updated");
 	}
 
+	
+//Courses	
 	@Override
 	public List<Course> listCourses(long idProfile) {
 		return profileRepository.findOne(idProfile).getCourses();
@@ -199,10 +241,29 @@ public class EditProfileServiceImpl implements EditProfileService {
 		} else {
 			profile.setCourses(courses);
 			profileRepository.save(profile);
+			registerUpdateIndexProfileCoursesIfTransactionSuccess(idProfile, courses);
 		}
-		
+	}
+	
+	private void registerUpdateIndexProfileCoursesIfTransactionSuccess(final long idProfile, final List<Course> updateData) {
+		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+			@Override
+			public void afterCommit() {
+				LOGGER.info("Profile courses updated");
+				updateIndexProfileCourses(idProfile, updateData);
+			}
+		});
+	}
+	
+	private void updateIndexProfileCourses(long idProfile, List<Course> updateData) {
+		Profile profile = profileSearchRepository.findOne(idProfile);
+		profile.setCourses(updateData);
+		profileSearchRepository.save(profile);
+		LOGGER.info("Profile courses index updated");
 	}
 
+	
+//Education	
 	@Override
 	public List<Education> listEducations(long idProfile) {
 		return profileRepository.findOne(idProfile).getEducations();
@@ -217,9 +278,31 @@ public class EditProfileServiceImpl implements EditProfileService {
 		} else {
 			profile.setEducations(educations);
 			profileRepository.save(profile);
+			registerUpdateIndexProfileEducationIfTransactionSuccess(idProfile, educations);
 		}
 	}
+	
+	private void registerUpdateIndexProfileEducationIfTransactionSuccess(final long idProfile, final List<Education> updateData) {
+		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+			@Override
+			public void afterCommit() {
+				LOGGER.info("Profile education updated");
+				updateIndexProfileEducation(idProfile, updateData);
+			}
+		});
+	}
+	
+	private void updateIndexProfileEducation(long idProfile, List<Education> updateData) {
+		Profile profile = profileSearchRepository.findOne(idProfile);
+		profile.setEducations(updateData);
+		profileSearchRepository.save(profile);
+		LOGGER.info("Profile education index updated");
+	}
 
+	
+
+
+//Languages	
 	@Override
 	public List<Language> listLanguages(long idProfile) {
 		return profileRepository.findOne(idProfile).getLanguages();
@@ -234,10 +317,30 @@ public class EditProfileServiceImpl implements EditProfileService {
 		} else {
 			profile.setLanguages(languages);
 			profileRepository.save(profile);
+			registerUpdateIndexProfileLanguagesIfTransactionSuccess(idProfile, languages);
 		}
 		
 	}
+	
+	private void registerUpdateIndexProfileLanguagesIfTransactionSuccess(final long idProfile, final List<Language> updateData) {
+		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+			@Override
+			public void afterCommit() {
+				LOGGER.info("Profile languages updated");
+				updateIndexProfileLanguage(idProfile, updateData);
+			}
+		});
+	}
+	
+	private void updateIndexProfileLanguage(long idProfile, List<Language> updateData) {
+		Profile profile = profileSearchRepository.findOne(idProfile);
+		profile.setLanguages(updateData);
+		profileSearchRepository.save(profile);
+		LOGGER.info("Profile languages index updated");
+	}
 
+	
+//Profile update	
 	@Override
 	public Profile profile(long idProfile) {
 		return profileRepository.findOne(idProfile);
@@ -256,35 +359,11 @@ public class EditProfileServiceImpl implements EditProfileService {
 		prof.setSummary(profileForm.getSummary());
 		prof.setLargePhoto(profileForm.getLargePhoto());
 		prof.setSmallPhoto(profileForm.getSmallPhoto());
-		prof.setFirstName(profileForm.getFirstName());
-		prof.setLastName(profileForm.getLastName());
 		profileRepository.save(prof);
-		//registerUpdateIndexAccountIfTransactionSuccess(idProfile, prof);
+		registerUpdateIndexAccountIfTransactionSuccess(idProfile, prof);
 	}
 
-	@Override
-	public Contacts contacts(long idProfile) {
-		return profileRepository.findOne(idProfile).getContacts();
-	}
-
-	@Override
-	@Transactional
-	public void updateContacts(long idProfile, Contacts contactsForm) {
-		Profile profile = profileRepository.findOne(idProfile);
-		profile.setContacts(contactsForm);
-		profileRepository.save(profile);
-	}
-
-	@Override
-	@Transactional
-	public void updateInfo(long idProfile, Profile profileForm) {
-		Profile profile = profileRepository.findOne(idProfile);
-		profile.setInfo(profileForm.getInfo());
-		profileRepository.save(profile);
-		
-	}
-
-	/*private void registerUpdateIndexAccountIfTransactionSuccess(final long idProfile, final Profile prof) {
+	private void registerUpdateIndexAccountIfTransactionSuccess(final long idProfile, final Profile prof) {
 		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
 			@Override
 			public void afterCommit() {
@@ -297,5 +376,103 @@ public class EditProfileServiceImpl implements EditProfileService {
 	private void updateIndexProfile(long idProfile, Profile profile) {
 		profileSearchRepository.save(profile);
 		LOGGER.info("Profile index updated");
-	}*/
+	}
+	
+//Contacts	
+	@Override
+	public Contacts contacts(long idProfile) {
+		return profileRepository.findOne(idProfile).getContacts();
+	}
+
+	@Override
+	@Transactional
+	public void updateContacts(long idProfile, Contacts contacts) {
+		Profile profile = profileRepository.findOne(idProfile);
+		profile.setContacts(contacts);
+		profileRepository.save(profile);
+		registerUpdateIndexProfileContactsIfTransactionSuccess(idProfile, contacts);
+	}
+	
+	private void registerUpdateIndexProfileContactsIfTransactionSuccess(final long idProfile, final Contacts contacts) {
+		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+			@Override
+			public void afterCommit() {
+				LOGGER.info("Profile contacts updated");
+				updateIndexProfileContacts(idProfile, contacts);
+			}
+		});
+	}
+	
+	private void updateIndexProfileContacts(long idProfile, Contacts contacts) {
+		Profile profile = profileSearchRepository.findOne(idProfile);
+		profile.setContacts(contacts);
+		profileSearchRepository.save(profile);
+		LOGGER.info("Profile contacts index updated");
+	}
+
+	
+/* Info	*/
+	@Override
+	@Transactional
+	public void updateInfo(long idProfile, Profile info) {
+		Profile profile = profileRepository.findOne(idProfile);
+		profile.setInfo(info.getInfo());
+		profileRepository.save(profile);
+		registerUpdateIndexProfileInfoIfTransactionSuccess(idProfile, profile);
+	}
+	
+	private void registerUpdateIndexProfileInfoIfTransactionSuccess(final long idProfile, final Profile profile) {
+		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+			@Override
+			public void afterCommit() {
+				LOGGER.info("Profile info updated");
+				updateIndexProfileInfo(idProfile, profile);
+			}
+		});
+	}
+	
+	private void updateIndexProfileInfo(long idProfile, Profile profile) {
+		profileSearchRepository.save(profile);
+		LOGGER.info("Profile info updated");
+	}
+
+	
+/* Certificates */	
+	@Override
+	public List<Certificate> listCertificates(long idProfile) {
+		return profileRepository.findOne(idProfile).getCertificates();
+	}
+
+	@Override
+	@Transactional
+	public void updateCertificates(long idProfile, List<Certificate> certificates) {
+		Profile profile = profileRepository.findOne(idProfile);
+		if(CollectionUtils.isEqualCollection(certificates, profile.getCertificates())) {
+			LOGGER.debug("Profile certificates: nothing to update");
+			return;
+		} else {
+			profile.setCertificates(certificates);
+			profileRepository.save(profile);
+			registerUpdateIndexProfileCertificatesIfTransactionSuccess(idProfile, certificates);
+		}
+	}
+	
+	private void registerUpdateIndexProfileCertificatesIfTransactionSuccess(final long idProfile, final List<Certificate> updateData) {
+		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
+			@Override
+			public void afterCommit() {
+				LOGGER.info("Profile certificates updated");
+				updateIndexProfileCertificates(idProfile, updateData);
+			}
+		});
+	}
+	
+	private void updateIndexProfileCertificates(long idProfile, List<Certificate> updateData) {
+		Profile profile = profileSearchRepository.findOne(idProfile);
+		profile.setCertificates(updateData);
+		profileSearchRepository.save(profile);
+		LOGGER.info("Profile certificates index updated");
+	}
+
+	
 }

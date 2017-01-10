@@ -153,3 +153,9 @@ textarea.form-control-skills {
 		height: 400px;
 	}
 }
+
+.row-certificate {
+	height: 120px;
+	width: 15%;
+	text-align: center;
+}

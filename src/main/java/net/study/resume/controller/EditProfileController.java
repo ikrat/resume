@@ -20,9 +20,10 @@ import net.study.resume.form.LanguagesForm;
 import net.study.resume.form.PracticsForm;
 import net.study.resume.form.ProfileForm;
 import net.study.resume.form.SkillForm;
+import net.study.resume.form.UploadForm;
 import net.study.resume.repository.storage.HobbiesCategoryRepository;
-import net.study.resume.repository.storage.ProfileRepository;
 import net.study.resume.service.EditProfileService;
+import net.study.resume.service.PhotoDownloadService;
 import net.study.resume.util.SecurityUtil;
 
 @Controller
@@ -32,12 +33,12 @@ public class EditProfileController {
 	private EditProfileService editProfileService;
 	
 	@Autowired
-	private ProfileRepository profileRepository;
+	private HobbiesCategoryRepository hobbiesCategoryRepository;
 	
 	@Autowired
-	private HobbiesCategoryRepository hobbiesCategoryRepository;
+	private PhotoDownloadService photoDownloadService;
 
-		
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String getEditProfile(Model model) {
 		model.addAttribute("profileForm", new ProfileForm(editProfileService.profile(SecurityUtil.getCurrentIdProfile())));
@@ -49,6 +50,7 @@ public class EditProfileController {
 		if(bindingResult.hasErrors()) {
 			return "edit";
 		}
+		photoDownloadService.downloadPhoto(form);
 		editProfileService.updateProfile(SecurityUtil.getCurrentIdProfile(), form.getProfile());
 		return "redirect:/edit/contacts";
 	}
@@ -79,7 +81,7 @@ public class EditProfileController {
 	public String saveContacts(@ModelAttribute("contactsForm") ContactsForm contactsForm, BindingResult bindingResult,
 			Model model) {
 		if(bindingResult.hasErrors()) {
-			return "/edit/contacts";
+			return "edit/contacts";
 		}
 		editProfileService.updateContacts(SecurityUtil.getCurrentIdProfile(), contactsForm.getContacts());
 		return "redirect:/edit/skills";
@@ -167,7 +169,7 @@ public class EditProfileController {
 
 	@RequestMapping(value = "/edit/certificates", method = RequestMethod.GET)
 	public String getCertificates(Model model) {
-		model.addAttribute("certificateForm", new CertificateForm(profileRepository.findOne(1L).getCertificates()));
+		model.addAttribute("certificateForm", new CertificateForm(editProfileService.listCertificates(SecurityUtil.getCurrentIdProfile())));
 		return "/edit/certificates";
 	}
 
@@ -177,8 +179,19 @@ public class EditProfileController {
 		if (bindingResult.hasErrors()) {
 			return "/edit/certificates";
 		}
-		// TODO update certificates
+		editProfileService.updateCertificates(SecurityUtil.getCurrentIdProfile(), form.getItems());
 		return "redirect:/edit/courses";
+	}
+	
+	
+	@RequestMapping(value="/edit/certificates/upload", method=RequestMethod.POST)
+	public String uploadCertificates(@ModelAttribute("uploadForm") UploadForm uploadForm, BindingResult bindingResult,
+			Model model) {
+		if(bindingResult.hasErrors()) {
+			return "/edit/certificates";
+		} 
+		photoDownloadService.downloadCertificate(uploadForm);
+		return "redirect:/edit/certificates";
 	}
 
 	@RequestMapping(value = "/edit/skills", method = RequestMethod.GET)

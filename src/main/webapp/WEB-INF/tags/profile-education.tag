@@ -31,7 +31,7 @@
 										</c:if>
 									</p>
 									<div class="timeline-body">
-										<p>${education.faculty },${education.university }</p>
+										<p>${education.faculty }, ${education.university }</p>
 									</div>
 								</div>
 							</div>

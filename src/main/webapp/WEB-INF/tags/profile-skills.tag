@@ -11,7 +11,7 @@
 	<div class="panel-body">
 		<c:choose>
 			<c:when test="${profile.skills.size() == 0 }">
-				<strong>No any data.</strong>
+				<h6>No any data.</h6>
 			</c:when>
 			<c:otherwise>
 				<table class="table table-striped table-bordered">

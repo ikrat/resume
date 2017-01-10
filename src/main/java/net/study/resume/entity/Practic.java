@@ -48,11 +48,6 @@ public class Practic extends AbstractFinishDateEntity<Long> implements Serializa
 	@Column(name = "begin_date", nullable = false)
 	private Date beginDate;
 
-	@Transient
-	private Integer beginDateMonth;
-
-	@Transient
-	private Integer beginDateYear;
 
 	// bi-directional many-to-one association to Profile
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -142,24 +137,6 @@ public class Practic extends AbstractFinishDateEntity<Long> implements Serializa
 			return new DateTime(beginDate).getYear();
 		} else {
 			return null;
-		}
-	}
-
-	public void setBeginDateMonth(Integer beginDateMonth) {
-		this.beginDateMonth = beginDateMonth;
-		setupBeginDate();
-	}
-
-	public void setBeginDateYear(Integer beginDateYear) {
-		this.beginDateYear = beginDateYear;
-		setupBeginDate();
-	}
-
-	private void setupBeginDate() {
-		if (beginDateYear != null && beginDateMonth != null) {
-			setBeginDate(new Date(new DateTime(beginDateYear, beginDateMonth, 1, 0, 0).getMillis()));
-		} else {
-			setBeginDate(null);
 		}
 	}
 

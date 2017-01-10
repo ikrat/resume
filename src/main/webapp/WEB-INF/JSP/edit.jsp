@@ -8,9 +8,9 @@
 <resume:edit-navbar />
 <div class="panel panel-primary">
 	<div class="panel-body">
-		<form:form action="/edit" method="post" commandName="profileForm">
+		<form:form action="/edit" method="post" enctype="multipart/form-data" commandName="profileForm">
 			<div class="data-header" align="center">
-				<h2 class="text">${profileForm.profile.fullName }</h2>
+				<h2 class="text">${profileForm.profile.fullName}</h2>
 			</div>
 			<hr />
 			<div class="container-fluid">
@@ -20,7 +20,7 @@
 							<h4>Фото:</h4>
 						</div>
 						<div class="col-md-9">
-							<img alt="" src="${profileForm.profile.largePhoto }"><br>
+							<img src="${profileForm.profile.largePhoto }"><br>
 							<div>
 								<div class="row center">
 									<div class="col-md-1 col-sm-2"></div>
@@ -68,7 +68,7 @@
 							</h5>
 						</div>
 						<div class="col-md-9">
-							<textarea name="profile.country" class="form-control pull-right" style="resize: none;">${profileForm.profile.country }</textarea>
+							<input name="profile.country" class="form-control pull-right" id="inputCountry" value="${profileForm.profile.country }" required="required">
 						</div>
 					</div>
 					<div class="col-md-5">

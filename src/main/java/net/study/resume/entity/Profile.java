@@ -70,7 +70,6 @@ public class Profile extends AbstractEntity<Long> implements Serializable {
 	private String objective;
 
 	@Column(name = "large_photo", length = 255)
-	@JsonIgnore
 	private String largePhoto;
 
 	@Column(name = "small_photo", length = 255)

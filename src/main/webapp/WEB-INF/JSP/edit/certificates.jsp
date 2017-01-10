@@ -10,12 +10,12 @@
 		<hr />
 		<form:form action="/edit/certificates" method="post" commandName="certificateForm">
 			<div id="ui-block-container">
-				<c:forEach var="certificate" items="${certificateForm.certificates }" varStatus="status">
+				<c:forEach var="certificate" items="${certificateForm.items }" varStatus="status">
 					<resume:edit-certificate-block index="${status.index }" certificate="${certificate }"/>
 				</c:forEach>
 				<div class="row" align="center">
 					<div class="col-xs-12">
-						<a href="javascript:void(0);">+ Добавить сертификат</a>
+						<a data-target="#myModal" data-toggle="modal"> + Добавить сертификат</a>
 					</div>
 				</div>
 			</div>
@@ -29,3 +29,5 @@
 		</form:form>
 	</div>
 </div>
+
+<resume:modal-loader />
