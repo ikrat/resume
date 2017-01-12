@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,7 @@ import net.study.resume.form.PracticsForm;
 import net.study.resume.form.ProfileForm;
 import net.study.resume.form.SkillForm;
 import net.study.resume.form.UploadForm;
+import net.study.resume.model.CurrentProfile;
 import net.study.resume.repository.storage.HobbiesCategoryRepository;
 import net.study.resume.service.EditProfileService;
 import net.study.resume.service.PhotoDownloadService;
@@ -50,7 +52,9 @@ public class EditProfileController {
 		if(bindingResult.hasErrors()) {
 			return "edit";
 		}
-		photoDownloadService.downloadPhoto(form);
+		if(!form.getFile().isEmpty()) {
+			photoDownloadService.downloadPhoto(form);
+		}
 		editProfileService.updateProfile(SecurityUtil.getCurrentIdProfile(), form.getProfile());
 		return "redirect:/edit/contacts";
 	}
@@ -185,7 +189,7 @@ public class EditProfileController {
 	
 	
 	@RequestMapping(value="/edit/certificates/upload", method=RequestMethod.POST)
-	public String uploadCertificates(@ModelAttribute("uploadForm") UploadForm uploadForm, BindingResult bindingResult,
+	public String uploadCertificates(@Valid @ModelAttribute("uploadForm") UploadForm uploadForm, BindingResult bindingResult,
 			Model model) {
 		if(bindingResult.hasErrors()) {
 			return "/edit/certificates";
@@ -219,6 +223,21 @@ public class EditProfileController {
 		model.addAttribute("hobbiesCategories", hobbiesCategoryRepository.findAll(new Sort("id")));
 		model.addAttribute("profileForm", new ProfileForm(editProfileService.profile(SecurityUtil.getCurrentIdProfile())));
 		return "edit/hobby";
+	}
+	
+	@RequestMapping(value="/my-profile")
+	public String getMyProfile(@AuthenticationPrincipal CurrentProfile currentProfile) {
+		return "redirect:/" + currentProfile.getUsername();
+	}
+	
+	@RequestMapping(value="/sign-up-main", method=RequestMethod.POST)
+	public String signUpMain(@Valid @ModelAttribute("profileForm") ProfileForm form, BindingResult bindingResult, Model model){
+		if(bindingResult.hasErrors()) {
+			return "sign-up-main";
+		}
+		photoDownloadService.downloadPhoto(form);
+		editProfileService.updateProfile(SecurityUtil.getCurrentIdProfile(), form.getProfile());
+		return "redirect:/my-profile";
 	}
 	
 }

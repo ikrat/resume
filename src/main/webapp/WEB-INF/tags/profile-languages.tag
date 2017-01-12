@@ -13,7 +13,11 @@
 	<div class="panel-body">
 		<c:choose>
 			<c:when test="${profile.languages.size() == 0 }">
-				<strong>No any data.</strong>
+				<div align="center">
+					<h6>
+						<b>Information about the foreign languages are not filled.</b>
+					</h6>
+				</div>
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${profile.languages }" var="language">

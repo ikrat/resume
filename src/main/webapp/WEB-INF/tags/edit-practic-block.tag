@@ -26,7 +26,7 @@
 			<div class="col-xs-5 col-sm-4 col-md-6 form-group">
 			<b>Дата начала</b>
 			<br>
-			<input name="items[${index }].beginDate" class="datepicker-here form-control"  value="${practic.beginDate }"/>
+			<input name="items[${index }].beginDate" class="datepicker-here form-control"  value="${practic.beginDate }" required="required"/>
 			</div>
 			
 				<div class="col-xs-5 col-sm-4 col-md-6 form-group">

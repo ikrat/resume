@@ -13,7 +13,9 @@
 	<div class="panel-body">
 		<c:choose>
 			<c:when test="${profile.practics.size() == 0 }">
-				<strong>No any data.</strong>
+			<div align="center">
+				<strong>Information about the traineeship are not filled.</strong>
+			</div>
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${profile.practics }" var="practic">

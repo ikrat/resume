@@ -12,7 +12,9 @@
 	<div class="panel-body">
 		<c:choose>
 			<c:when test="${profile.certificates.size() == 0 }">
-				<div align="center">No any certificates.</div>
+				<div align="center">
+					<strong>No certificates were not uploaded.</strong>
+				</div>
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${profile.certificates }" var="certificate">

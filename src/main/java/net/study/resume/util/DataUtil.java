@@ -4,8 +4,6 @@ import java.util.Random;
 
 import org.apache.commons.lang.WordUtils;
 
-import net.study.resume.form.SignUpForm;
-
 public class DataUtil {
 
 	public static String normalizeName(String name) {
@@ -16,8 +14,8 @@ public class DataUtil {
 		return WordUtils.capitalize(normalizeName(name));
 	}
 	
-	public static String generateProfileUid(SignUpForm profile) {
-		return normalizeName(profile.getFirstName()) + UID_DELIMETER + normalizeName(profile.getLastName());
+	public static String generateProfileUid(String firstName, String lastName) {
+		return normalizeName(firstName) + UID_DELIMETER + normalizeName(lastName);
 	}
 	
 	public static String regenerateUidWithRandomSuffix(String baseUid, String alphabet, int letterCount) {

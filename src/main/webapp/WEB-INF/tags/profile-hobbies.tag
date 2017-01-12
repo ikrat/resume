@@ -12,7 +12,9 @@
 	<div class="panel-body">
 		<c:choose>
 			<c:when test="${profile.hobbies.size() == 0 }">
-				<strong>No any data.</strong>
+				<div align="center">
+					<h6><b>Information about the hobbies are not filled.</b></h6>
+				</div>
 			</c:when>
 			<c:otherwise>
 				<div class="hobbies">

@@ -2,6 +2,8 @@ package net.study.resume.service;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import net.study.resume.entity.Certificate;
 import net.study.resume.entity.Contacts;
 import net.study.resume.entity.Course;
@@ -55,7 +57,7 @@ public interface EditProfileService {
 	
 	void updateProfile (long idProfile, Profile profileForm);
 	
-	void updateContacts (long idProfile, Contacts contacts);
+	void updateContacts (long idProfile, @Nonnull Contacts contacts);
 	
 	void updateInfo(long idProfile, Profile profileForm);
 	

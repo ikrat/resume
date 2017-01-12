@@ -14,7 +14,8 @@
 		<div class="col-lg-3 col-sm-2 ">
 			<input type="hidden" name="items[${index }].id" value="${language.id }" />
 			<div class="input-practic">
-				<label for="begin-month">Тип</label> <select class="form-control" name="items[${index }].type">
+				<label for="begin-month">Тип</label> 
+				<select class="form-control" name="items[${index }].type">
 					<option value="ALL">Не указан</option>
 					<option ${language.type == 'WRITING' ? ' selected="selected"' : ''} value="WRITING">Письменный</option>
 					<option ${language.type == 'SPOKEN' ? ' selected="selected"' : ''} value="SPOKEN">Разговорный</option>
@@ -23,7 +24,8 @@
 		</div>
 		<div class="col-lg-3 col-sm-2 ">
 			<div class="input-practic">
-				<label for="begin-month">Язык</label> <select class="form-control" name="items[${index }].name">
+				<label for="begin-month">Язык</label>
+				<select class="form-control" name="items[${index }].name">
 					<option ${language.name == 'English' ? ' selected="selected"' : ''}>English</option>
 					<option ${language.name == 'Spanish' ? ' selected="selected"' : ''}>Spanish</option>
 					<option ${language.name == 'French' ? ' selected="selected"' : ''}>French</option>

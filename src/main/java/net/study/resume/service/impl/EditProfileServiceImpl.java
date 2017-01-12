@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
@@ -51,6 +52,9 @@ public class EditProfileServiceImpl implements EditProfileService {
 	@Autowired
 	private HobbiesCategoryRepository hobbiesCategoryRepository;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@Value("${generate.uid.suffix.length}")
 	private int generateUidSuffixLength;
 
@@ -65,10 +69,10 @@ public class EditProfileServiceImpl implements EditProfileService {
 	@Transactional
 	public Profile createNewProfile(SignUpForm signUpForm) {
 		Profile profile = new Profile();
-		profile.setUid(generateProfileUid(signUpForm));
+		profile.setUid(generateProfileUid(signUpForm.getFirstName(), signUpForm.getLastName()));
 		profile.setFirstName(DataUtil.capitalizeName(signUpForm.getFirstName()));
 		profile.setLastName(DataUtil.capitalizeName(signUpForm.getLastName()));
-		profile.setPassword(signUpForm.getPassword());
+		profile.setPassword(passwordEncoder.encode(signUpForm.getPassword()));
 		profile.setCompleted(false);
 		profileRepository.save(profile);
 		registerCreateIndexProfileIfTransactionSuccess(profile);
@@ -91,8 +95,8 @@ public class EditProfileServiceImpl implements EditProfileService {
 		});
 	}
 
-	private String generateProfileUid(SignUpForm signUpForm) throws CantCompleteClientRequestException {
-		String baseUid = DataUtil.generateProfileUid(signUpForm);
+	private String generateProfileUid(String firstName, String lastName) throws CantCompleteClientRequestException {
+		String baseUid = DataUtil.generateProfileUid(firstName, lastName);
 		String uid = baseUid;
 		for (int i = 0; profileRepository.countByUid(uid) > 0; i++ ) {
 			uid = DataUtil.regenerateUidWithRandomSuffix(baseUid, generateUidAlphabet, generateUidSuffixLength);
@@ -126,11 +130,11 @@ public class EditProfileServiceImpl implements EditProfileService {
 		} else {
 			profile.setSkills(updateData);
 			profileRepository.save(profile);
-			registerUpdateIndexProfileSkillsIfTransactionSuccess(idProfile, updateData);
+			//registerUpdateIndexProfileSkillsIfTransactionSuccess(idProfile, updateData);
 		}
 	}
 
-	private void registerUpdateIndexProfileSkillsIfTransactionSuccess(final long idProfile, final List<Skill> updateData) {
+	/*private void registerUpdateIndexProfileSkillsIfTransactionSuccess(final long idProfile, final List<Skill> updateData) {
 		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
 			@Override
 			public void afterCommit() {
@@ -145,7 +149,7 @@ public class EditProfileServiceImpl implements EditProfileService {
 		profile.setSkills(updateData);
 		profileSearchRepository.save(profile);
 		LOGGER.info("Profile skills index updated");
-	}
+	}*/
 
 //Hobby	
 	@Override
@@ -167,11 +171,11 @@ public class EditProfileServiceImpl implements EditProfileService {
 		} else {
 			profile.setHobbies(updateData);
 			profileRepository.save(profile);
-			registerUpdateIndexProfileHobbiesIfTransactionSuccess(idProfile, updateData);
+			//registerUpdateIndexProfileHobbiesIfTransactionSuccess(idProfile, updateData);
 		}
 	}
 	
-	private void registerUpdateIndexProfileHobbiesIfTransactionSuccess(final long idProfile, final List<Hobby> updateData) {
+	/*private void registerUpdateIndexProfileHobbiesIfTransactionSuccess(final long idProfile, final List<Hobby> updateData) {
 		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
 			@Override
 			public void afterCommit() {
@@ -186,7 +190,7 @@ public class EditProfileServiceImpl implements EditProfileService {
 		profile.setHobbies(updateData);
 		profileSearchRepository.save(profile);
 		LOGGER.info("Profile hobbies index updated");
-	}
+	}*/
 
 	
 //Practice	
@@ -204,11 +208,11 @@ public class EditProfileServiceImpl implements EditProfileService {
 		} else {
 			profile.setPractics(practics);
 			profileRepository.save(profile);
-			registerUpdateIndexProfilePracticsIfTransactionSuccess(idProfile, practics);
+			//registerUpdateIndexProfilePracticsIfTransactionSuccess(idProfile, practics);
 		}
 	}
 	
-	private void registerUpdateIndexProfilePracticsIfTransactionSuccess(final long idProfile, final List<Practic> updateData) {
+	/*private void registerUpdateIndexProfilePracticsIfTransactionSuccess(final long idProfile, final List<Practic> updateData) {
 		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
 			@Override
 			public void afterCommit() {
@@ -223,7 +227,7 @@ public class EditProfileServiceImpl implements EditProfileService {
 		profile.setPractics(updateData);
 		profileSearchRepository.save(profile);
 		LOGGER.info("Profile practice index updated");
-	}
+	}*/
 
 	
 //Courses	
@@ -241,11 +245,11 @@ public class EditProfileServiceImpl implements EditProfileService {
 		} else {
 			profile.setCourses(courses);
 			profileRepository.save(profile);
-			registerUpdateIndexProfileCoursesIfTransactionSuccess(idProfile, courses);
+			//registerUpdateIndexProfileCoursesIfTransactionSuccess(idProfile, courses);
 		}
 	}
 	
-	private void registerUpdateIndexProfileCoursesIfTransactionSuccess(final long idProfile, final List<Course> updateData) {
+	/*private void registerUpdateIndexProfileCoursesIfTransactionSuccess(final long idProfile, final List<Course> updateData) {
 		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
 			@Override
 			public void afterCommit() {
@@ -260,7 +264,7 @@ public class EditProfileServiceImpl implements EditProfileService {
 		profile.setCourses(updateData);
 		profileSearchRepository.save(profile);
 		LOGGER.info("Profile courses index updated");
-	}
+	}*/
 
 	
 //Education	
@@ -278,11 +282,11 @@ public class EditProfileServiceImpl implements EditProfileService {
 		} else {
 			profile.setEducations(educations);
 			profileRepository.save(profile);
-			registerUpdateIndexProfileEducationIfTransactionSuccess(idProfile, educations);
+			//registerUpdateIndexProfileEducationIfTransactionSuccess(idProfile, educations);
 		}
 	}
 	
-	private void registerUpdateIndexProfileEducationIfTransactionSuccess(final long idProfile, final List<Education> updateData) {
+	/*private void registerUpdateIndexProfileEducationIfTransactionSuccess(final long idProfile, final List<Education> updateData) {
 		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
 			@Override
 			public void afterCommit() {
@@ -297,7 +301,7 @@ public class EditProfileServiceImpl implements EditProfileService {
 		profile.setEducations(updateData);
 		profileSearchRepository.save(profile);
 		LOGGER.info("Profile education index updated");
-	}
+	}*/
 
 	
 
@@ -317,12 +321,12 @@ public class EditProfileServiceImpl implements EditProfileService {
 		} else {
 			profile.setLanguages(languages);
 			profileRepository.save(profile);
-			registerUpdateIndexProfileLanguagesIfTransactionSuccess(idProfile, languages);
+			//registerUpdateIndexProfileLanguagesIfTransactionSuccess(idProfile, languages);
 		}
 		
 	}
 	
-	private void registerUpdateIndexProfileLanguagesIfTransactionSuccess(final long idProfile, final List<Language> updateData) {
+	/*private void registerUpdateIndexProfileLanguagesIfTransactionSuccess(final long idProfile, final List<Language> updateData) {
 		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
 			@Override
 			public void afterCommit() {
@@ -337,7 +341,7 @@ public class EditProfileServiceImpl implements EditProfileService {
 		profile.setLanguages(updateData);
 		profileSearchRepository.save(profile);
 		LOGGER.info("Profile languages index updated");
-	}
+	}*/
 
 	
 //Profile update	
@@ -390,10 +394,10 @@ public class EditProfileServiceImpl implements EditProfileService {
 		Profile profile = profileRepository.findOne(idProfile);
 		profile.setContacts(contacts);
 		profileRepository.save(profile);
-		registerUpdateIndexProfileContactsIfTransactionSuccess(idProfile, contacts);
+		//registerUpdateIndexProfileContactsIfTransactionSuccess(idProfile, contacts);
 	}
 	
-	private void registerUpdateIndexProfileContactsIfTransactionSuccess(final long idProfile, final Contacts contacts) {
+	/*private void registerUpdateIndexProfileContactsIfTransactionSuccess(final long idProfile, final Contacts contacts) {
 		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
 			@Override
 			public void afterCommit() {
@@ -408,7 +412,7 @@ public class EditProfileServiceImpl implements EditProfileService {
 		profile.setContacts(contacts);
 		profileSearchRepository.save(profile);
 		LOGGER.info("Profile contacts index updated");
-	}
+	}*/
 
 	
 /* Info	*/
@@ -418,10 +422,10 @@ public class EditProfileServiceImpl implements EditProfileService {
 		Profile profile = profileRepository.findOne(idProfile);
 		profile.setInfo(info.getInfo());
 		profileRepository.save(profile);
-		registerUpdateIndexProfileInfoIfTransactionSuccess(idProfile, profile);
+		//registerUpdateIndexProfileInfoIfTransactionSuccess(idProfile, profile);
 	}
 	
-	private void registerUpdateIndexProfileInfoIfTransactionSuccess(final long idProfile, final Profile profile) {
+	/*private void registerUpdateIndexProfileInfoIfTransactionSuccess(final long idProfile, final Profile profile) {
 		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
 			@Override
 			public void afterCommit() {
@@ -434,7 +438,7 @@ public class EditProfileServiceImpl implements EditProfileService {
 	private void updateIndexProfileInfo(long idProfile, Profile profile) {
 		profileSearchRepository.save(profile);
 		LOGGER.info("Profile info updated");
-	}
+	}*/
 
 	
 /* Certificates */	
@@ -453,11 +457,11 @@ public class EditProfileServiceImpl implements EditProfileService {
 		} else {
 			profile.setCertificates(certificates);
 			profileRepository.save(profile);
-			registerUpdateIndexProfileCertificatesIfTransactionSuccess(idProfile, certificates);
+			//registerUpdateIndexProfileCertificatesIfTransactionSuccess(idProfile, certificates);
 		}
 	}
 	
-	private void registerUpdateIndexProfileCertificatesIfTransactionSuccess(final long idProfile, final List<Certificate> updateData) {
+	/*private void registerUpdateIndexProfileCertificatesIfTransactionSuccess(final long idProfile, final List<Certificate> updateData) {
 		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
 			@Override
 			public void afterCommit() {
@@ -472,7 +476,7 @@ public class EditProfileServiceImpl implements EditProfileService {
 		profile.setCertificates(updateData);
 		profileSearchRepository.save(profile);
 		LOGGER.info("Profile certificates index updated");
-	}
+	}*/
 
 	
 }

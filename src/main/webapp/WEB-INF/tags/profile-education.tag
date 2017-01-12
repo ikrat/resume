@@ -12,7 +12,9 @@
 	<div class="panel-body">
 		<c:choose>
 			<c:when test="${profile.educations.size() == 0 }">
-				<strong>No any data.</strong>
+				<div align="center">
+					<strong>Information about education are not filled.</strong>
+				</div>
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${profile.educations }" var="education">
@@ -31,7 +33,7 @@
 										</c:if>
 									</p>
 									<div class="timeline-body">
-										<p>${education.faculty }, ${education.university }</p>
+										<p>${education.faculty },${education.university }</p>
 									</div>
 								</div>
 							</div>

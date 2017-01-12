@@ -7,7 +7,6 @@ import net.study.resume.entity.Profile;
 public class ProfileForm {
 	
 	private MultipartFile file;
-	
 	private Profile profile;
 
 	public ProfileForm(Profile profile) {
@@ -17,7 +16,6 @@ public class ProfileForm {
 
 	public ProfileForm() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public MultipartFile getFile() {

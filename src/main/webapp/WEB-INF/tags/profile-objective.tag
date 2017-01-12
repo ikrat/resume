@@ -12,17 +12,17 @@
 	<div class="panel-body">
 		<c:choose>
 			<c:when test="${profile.objective == null }">
-				<strong>Profession:</strong> I don't know who I want to be =(<br>
+				<strong>Information about the preferred profession are not filled.</strong><br>
 			</c:when>
 			<c:otherwise>
-					<h4>${profile.objective }</h4>
+				<h4>${profile.objective }</h4>
 			</c:otherwise>
 		</c:choose>
-		
+
 		<c:choose>
-			<c:when test="${profile.summary == null }">
-				<strong>Summary of Qualifications: </strong> No any data.
-				</c:when>
+			<c:when test="${profile.summary.isEmpty() }">
+				<strong>Summary of Qualifications: </strong> Information about the qualification are not filled.
+			</c:when>
 			<c:otherwise>
 				<p>
 					<strong>Summary of Qualifications: </strong> <br> ${profile.summary }

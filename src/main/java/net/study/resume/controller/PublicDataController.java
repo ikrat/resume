@@ -2,6 +2,8 @@ package net.study.resume.controller;
 
 import java.io.UnsupportedEncodingException;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,14 +21,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import net.study.resume.Constants;
 import net.study.resume.entity.Profile;
+import net.study.resume.form.ProfileForm;
 import net.study.resume.form.SignUpForm;
+import net.study.resume.model.CurrentProfile;
+import net.study.resume.service.EditProfileService;
 import net.study.resume.service.FindProfileService;
+import net.study.resume.util.SecurityUtil;
 
 @Controller
 public class PublicDataController {
 
 	@Autowired
 	private FindProfileService findProfileService;
+	
+	@Autowired
+	private EditProfileService editProfileService;
 	
 	
 	@RequestMapping(value="/{uid}", method=RequestMethod.GET)
@@ -77,19 +86,24 @@ public class PublicDataController {
 		if(bindingResult.hasErrors()) {
 			return "sign-up";
 		}
-		//Profile profile = editProfileService.createNewProfile(signUpForm);
+		Profile profile = editProfileService.createNewProfile(signUpForm);
+		SecurityUtil.authentificate(profile);
 		return "redirect:/sign-up-success";
 	}
 	
 	@RequestMapping(value="/sign-up-success")
 	public String signUpSuccess(Model model){
+		model.addAttribute("profileForm", new ProfileForm(editProfileService.profile(SecurityUtil.getCurrentIdProfile())));
 		return "/sign-up-success";
 	}
 	
 	@RequestMapping(value="/sign-up-main", method=RequestMethod.GET)
-	public String getSignUpMain(){
+	public String getSignUpMain(Model model){
+		model.addAttribute("profileForm", new ProfileForm(editProfileService.profile(SecurityUtil.getCurrentIdProfile())));
 		return "sign-up-main";
 	}
+	
+	
 	
 	@RequestMapping(value="/fragment/more", method=RequestMethod.GET)
 	public String moreProfiles(Model model, @PageableDefault(size=Constants.MAX_PROFILES_PER_PAGE) @SortDefault(sort="id") Pageable pageable) throws UnsupportedEncodingException {
@@ -104,5 +118,23 @@ public class PublicDataController {
 		model.addAttribute("profiles", profiles.getContent());
 		model.addAttribute("page", profiles);
 		return "search";
+	}
+	
+	@RequestMapping(value="/sign-in")
+	public String signIn() {
+		CurrentProfile currentProfile = SecurityUtil.getCurrentProfile();
+		if(currentProfile != null) {
+			return "redirect:/" + currentProfile.getUsername();
+		} else {
+			return "sign-in";
+		}
+	}
+	
+	@RequestMapping(value="/sign-in-failed")
+	public String signInFailed(HttpSession session) {
+		if(session.getAttribute("SPRING_SECURITY_LAST_EXCEPTION") == null) {
+			return "redirect:/sign-in";
+		}
+		return "sign-in";
 	}
 }

@@ -1,0 +1,29 @@
+<%@ tag pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="resume" tagdir="/WEB-INF/tags"%>
+
+
+<div id="ui-item-${index }" class="row ui-item skill-item">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<button type="button" class="close" onclick="$('#ui-item-${index }').remove();">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<input type="hidden" name="items[0].id" value="${course.id }" />
+			<div class="col-md-4">
+				<b>Название курса*</b>
+				<textarea name="items[0].name" class="form-control" style="resize: none;"></textarea>
+			</div>
+			<div class="col-md-4">
+				<b>Название школы/площадки*</b>
+				<textarea name="items[0].school" class="form-control" style="resize: none;"></textarea>
+			</div>
+			<div class="col-md-3">
+				<b>Дата окончания</b>
+				<input name="items[0].finishDate" class="datepicker-here form-control"  value="${course.finishDate }"/>
+			</div>
+		</div>
+			
+	</div>
+</div>

@@ -7,9 +7,9 @@
 
 <div class="panel panel-primary">
 	<div class="panel-body">
-		<form:form action="/{UID}" method="post" commandName="profileForm">
+		<form:form action="/sign-up-main" method="post" enctype="multipart/form-data" commandName="profileForm">
 			<div class="data-header" align="center">
-				<h2 class="text">${signUpForm.fullName }</h2>
+				<h2 class="text">${profileForm.profile.fullName}</h2>
 			</div>
 			<hr />
 			<div class="data-header" align="center">
@@ -24,11 +24,13 @@
 						</div>
 						<div class="col-md-9">
 							<img alt="" src="/static/img/unknown.jpg"><br>
+							<input type="hidden" name="profile.largePhoto" value="${profileForm.profile.largePhoto}" />
+							<input type="hidden" name="profile.smallPhoto" value="${profileForm.profile.smallPhoto}" />
 							<div>
 								<div class="row center">
 									<div class="col-md-1 col-sm-2"></div>
 									<div class="col-md-1 col-sm-2">
-										<input type="file" class="btn btn-info" name="file" />
+										<input type="file" class="btn btn-info" name="file" value="${profileForm.profile.largePhoto }"/>
 									</div>
 								</div>
 							</div>
@@ -71,7 +73,7 @@
 							</h5>
 						</div>
 						<div class="col-md-9">
-							<textarea name="profile.country" class="form-control pull-right" style="resize: none;">${profileForm.profile.country }</textarea>
+							<input name="profile.country" class="form-control pull-right" id="inputCountry" value="${profileForm.profile.country }">
 						</div>
 					</div>
 					<div class="col-md-5">

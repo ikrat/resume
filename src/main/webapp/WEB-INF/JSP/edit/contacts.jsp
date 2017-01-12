@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="resume" tagdir="/WEB-INF/tags"%>
 
-<resume:edit-navbar />
+<resume:edit-navbar section="Contacts"/>
 <div class="panel panel-primary">
 	<div class="panel-body">
 		<h4 class="data-header" align="center">Дополнительные контакты:skype, ссылки на социальные профили и т.д.</h4>
@@ -18,7 +18,7 @@
 							</h5>
 						</div>
 						<div class="col-md-9">
-							<textarea name="contacts.skype" class="form-control pull-right" style="resize: none;">${contactsForm.contacts.skype }</textarea>
+							<input name="contacts.skype" class="form-control pull-right" value="${contactsForm.contacts.skype }">
 						</div>
 					</div>
 					<div class="col-md-6">

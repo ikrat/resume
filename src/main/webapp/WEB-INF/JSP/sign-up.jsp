@@ -15,21 +15,21 @@
 				в будущем! Поэтому предоставляйте реальные имя и фамилию!</div><br>
 				<div class="container-fluid">
 					<h5><b>Имя:</b></h5>
-					<input name="signUpForm.firstName" class="form-control" id="inputFirstName" value="${signUpForm.firstName }" placeholder="Example:Ihor"/>
+					<input name="firstName" class="form-control" id="inputFirstName" value="${signUpForm.firstName }" placeholder="Example:Ihor"/>
 				</div>
 				<br>
 				<div class="container-fluid">
 					<h5><b>Фамилия:</b></h5>
-					<input name="signUpForm.lastName" class="form-control" id="inputLastName" value="${signUpForm.lastName }" placeholder="Example:Krat"/>
+					<input name="lastName" class="form-control" id="inputLastName" value="${signUpForm.lastName }" placeholder="Example:Krat"/>
 				</div>
 				<br>
 				<div class="container-fluid">
 					<h5><b>Новый пароль:</b></h5>
-					<input name="signUpForm.password" class="form-control" id="inputPassword" value="${signUpForm.password }"/>
+					<input name="password" class="form-control" id="inputPassword" value="${signUpForm.password }"/>
 				</div>
 				<div class="container-fluid">
 					<h5><b>Подтверждение пароля:</b></h5>
-					<input name="signUpForm.confirmPassword" class="form-control" id="confirmPassword" value="${signUpForm.confirmPassword }"/>
+					<input name="confirmPassword" class="form-control" id="confirmPassword" value="${signUpForm.confirmPassword }"/>
 				</div>
 				<br>
 				<div class="row">

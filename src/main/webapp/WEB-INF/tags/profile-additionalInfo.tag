@@ -12,7 +12,9 @@
 	<div class="panel-body">
 		<c:choose>
 			<c:when test="${profile.info == null }">
-				<strong>No any data.</strong>
+			<div align="center">
+				<h6><b>Additional information is not filled.</b></h6>
+			</div>
 			</c:when>
 			<c:otherwise>
 				${profile.info }

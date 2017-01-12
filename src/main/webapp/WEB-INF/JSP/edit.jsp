@@ -5,7 +5,8 @@
 
 
 
-<resume:edit-navbar />
+
+<resume:edit-navbar section="Edit"/>
 <div class="panel panel-primary">
 	<div class="panel-body">
 		<form:form action="/edit" method="post" enctype="multipart/form-data" commandName="profileForm">
@@ -20,12 +21,22 @@
 							<h4>Фото:</h4>
 						</div>
 						<div class="col-md-9">
-							<img src="${profileForm.profile.largePhoto }"><br>
+							<c:choose>
+								<c:when test="${profileForm.profile.largePhoto != null }">
+									<img src="${profileForm.profile.largePhoto }" style="height: 400px; width: 400px;">
+									<br>
+									<input type="hidden" name="profile.largePhoto" value="${profileForm.profile.largePhoto}" />
+									<input type="hidden" name="profile.smallPhoto" value="${profileForm.profile.smallPhoto}" />
+								</c:when>
+								<c:otherwise>
+									<img src="/static/img/unknown.jpg">
+								</c:otherwise>
+							</c:choose>
 							<div>
 								<div class="row center">
 									<div class="col-md-1 col-sm-2"></div>
 									<div class="col-md-1 col-sm-2">
-										<input type="file" class="btn btn-info" name="file" />
+										<input type="file" class="btn btn-info" name="file" value="${profileForm.profile.largePhoto }" />
 									</div>
 								</div>
 							</div>

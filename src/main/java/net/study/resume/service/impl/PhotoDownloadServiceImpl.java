@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
 import net.coobird.thumbnailator.Thumbnails;
-import net.study.resume.entity.Certificate;
 import net.study.resume.entity.Profile;
+import net.study.resume.entity.Certificate;
 import net.study.resume.form.ProfileForm;
 import net.study.resume.form.UploadForm;
 import net.study.resume.repository.storage.ProfileRepository;
@@ -23,7 +23,7 @@ import net.study.resume.util.SecurityUtil;
 @Service
 public class PhotoDownloadServiceImpl implements PhotoDownloadService {
 	
-	@Value("download.photo.temporary")
+	@Value("${download.photo.temporary}")
 	private String temporary;
 	
 	@Value("${download.photo.avatar}")

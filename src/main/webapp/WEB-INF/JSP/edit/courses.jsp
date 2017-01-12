@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="resume" tagdir="/WEB-INF/tags"%>
 
-<resume:edit-navbar />
+<resume:edit-navbar section="Courses" />
 <div class="panel panel-primary">
 	<div class="panel-body">
 		<div class="col-md-12">
@@ -15,6 +15,9 @@
 					<c:forEach var="course" items="${courseForm.items }" varStatus="status">
 						<resume:edit-course-block index="${status.index }" course="${course }" />
 					</c:forEach>
+					<c:if test="${courseForm.items[0].name == null}">
+						<resume:edit-course-empty-block />
+					</c:if>
 				</div>
 				<div class="row">
 					<div class="col-xs-12">
