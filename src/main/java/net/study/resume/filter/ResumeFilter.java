@@ -46,4 +46,5 @@ public class ResumeFilter extends AbstractFilter {
 		resp.getWriter().write("");
 		resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 	}
+
 }

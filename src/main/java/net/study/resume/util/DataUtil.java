@@ -4,6 +4,8 @@ import java.util.Random;
 
 import org.apache.commons.lang.WordUtils;
 
+import com.restfb.types.User;
+
 public class DataUtil {
 
 	public static String normalizeName(String name) {
@@ -16,6 +18,10 @@ public class DataUtil {
 	
 	public static String generateProfileUid(String firstName, String lastName) {
 		return normalizeName(firstName) + UID_DELIMETER + normalizeName(lastName);
+	}
+	
+	public static String generateProfileUidFacebook(User user) {
+		return normalizeName(user.getFirstName()) + UID_DELIMETER + normalizeName(user.getLastName());
 	}
 	
 	public static String regenerateUidWithRandomSuffix(String baseUid, String alphabet, int letterCount) {

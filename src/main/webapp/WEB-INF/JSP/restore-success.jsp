@@ -6,11 +6,11 @@
 <div class="container-fluid" align="center">
 	<div class="panel panel-primary sign-up" align="left">
 		<div class="panel-heading">
-			<h3 class="panel-title">Ваш запрос выполнен</h3>
+			<h3 class="panel-title">Your request is complete</h3>
 		</div>
 		<div class="panel-body">
 			<div class="container-fluid">
-				<h5>Проверьте Ваш Email, чтобы завершить восстановление доступа!</h5>
+				<h5>Check your Email to complete access recovery!</h5>
 			</div>
 		</div>
 	</div>

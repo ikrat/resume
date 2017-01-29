@@ -15,7 +15,9 @@ import net.study.resume.entity.Practic;
 import net.study.resume.entity.Profile;
 import net.study.resume.entity.Skill;
 import net.study.resume.entity.SkillCategory;
+import net.study.resume.form.ChangePasswordForm;
 import net.study.resume.form.SignUpForm;
+import net.study.resume.model.CurrentProfile;
 
 public interface EditProfileService {
 
@@ -43,6 +45,8 @@ public interface EditProfileService {
 	
 	List<Certificate> listCertificates(long idProfile);
 	
+	Profile updatePassword (CurrentProfile currentProfile, ChangePasswordForm changeForm); 
+	
 	void updatePractics(long idProfile, List<Practic> practics);
 	
 	void updateHobbies(long idProfile, List<Hobby> hobbies);
@@ -62,4 +66,9 @@ public interface EditProfileService {
 	void updateInfo(long idProfile, Profile profileForm);
 	
 	void updateCertificates(long idProfile, List<Certificate> certificates);
+	
+	void addRestoreToken(long idProfile, String token);
+	
+	void removeRestoreToken(long idProfile);
+	
 }

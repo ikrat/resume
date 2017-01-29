@@ -3,6 +3,7 @@ package net.study.resume.controller;
 import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -64,13 +65,33 @@ public class PublicDataController {
 	}
 	
 	@RequestMapping(value="/restore", method=RequestMethod.GET)
-	public String getRestoreAccess(){
+	public String getRestore(){
 		return "restore";
 	}
 	
 	@RequestMapping(value="/restore/success", method=RequestMethod.GET)
 	public String getRestoreSuccess(){
 		return "restore-success";
+	}
+	
+	@RequestMapping(value="/restore", method=RequestMethod.POST)
+	public String postRestore(@ModelAttribute("anyUniqueId") String anyUniqueId, Model model) {
+		Profile profile = findProfileService.findByUniqueId(anyUniqueId);
+		if(profile != null) {
+			editProfileService.addRestoreToken(profile.getId(), SecurityUtil.generateNewRestoreAccessToken());
+		}
+		return "redirect:/restore/success";
+	}
+	
+	@RequestMapping(value="/restore/{token}", method=RequestMethod.GET)
+	public String restoreAccess(@PathVariable("token") String token, Model model){
+		Profile profile = findProfileService.findByRestoreToken(token);
+		if(profile == null) {
+			return "error";
+		}
+		SecurityUtil.authentificate(profile);
+		editProfileService.removeRestoreToken(profile.getId());
+		return "redirect:/edit/password";
 	}
 	
 	@RequestMapping(value="/welcome", method=RequestMethod.GET)
@@ -82,7 +103,7 @@ public class PublicDataController {
 	}
 	
 	@RequestMapping(value="/sign-up", method=RequestMethod.POST)
-	public String createProfile(@ModelAttribute("signUpForm") SignUpForm signUpForm, BindingResult bindingResult, Model model){
+	public String createProfile(@Valid @ModelAttribute("signUpForm") SignUpForm signUpForm, BindingResult bindingResult, Model model){
 		if(bindingResult.hasErrors()) {
 			return "sign-up";
 		}

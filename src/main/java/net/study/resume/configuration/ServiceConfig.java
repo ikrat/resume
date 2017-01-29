@@ -10,10 +10,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 @Configuration
-@ComponentScan({ "net.study.resume.service.impl", 
-				 "net.study.resume.controller",
+@ComponentScan({ "net.study.resume.service.impl",
 				 "net.study.resume.filter", 
-				 "net.study.resume.listener"})
+				 "net.study.resume.component.impl"})
 public class ServiceConfig {
 	
 	@Bean

@@ -23,7 +23,7 @@ public class Education extends AbstractEntity<Long> implements Serializable, Pro
 	@SequenceGenerator(name="EDUCATION_ID_GENERATOR", sequenceName="EDUCATION_SEQ", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EDUCATION_ID_GENERATOR")
 	@Column(unique=true, nullable=false)
-	private long id;
+	private Long id;
 
 	@Column(nullable=false, length=255)
 	private String faculty;
@@ -37,7 +37,7 @@ public class Education extends AbstractEntity<Long> implements Serializable, Pro
 	@Column(name="begin_year", nullable=false)
 	private Integer beginYear;
 	
-	@Column(name="finish_year", nullable=false)
+	@Column(name="finish_year")
 	private Integer finishYear;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
@@ -115,8 +115,7 @@ public class Education extends AbstractEntity<Long> implements Serializable, Pro
 		result = prime * result + ((beginYear == null) ? 0 : beginYear.hashCode());
 		result = prime * result + ((faculty == null) ? 0 : faculty.hashCode());
 		result = prime * result + ((finishYear == null) ? 0 : finishYear.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((profile == null) ? 0 : profile.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((summary == null) ? 0 : summary.hashCode());
 		result = prime * result + ((university == null) ? 0 : university.hashCode());
 		return result;
@@ -128,7 +127,7 @@ public class Education extends AbstractEntity<Long> implements Serializable, Pro
 			return true;
 		if (!super.equals(obj))
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof Education))
 			return false;
 		Education other = (Education) obj;
 		if (beginYear == null) {
@@ -146,12 +145,10 @@ public class Education extends AbstractEntity<Long> implements Serializable, Pro
 				return false;
 		} else if (!finishYear.equals(other.finishYear))
 			return false;
-		if (id != other.id)
-			return false;
-		if (profile == null) {
-			if (other.profile != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!profile.equals(other.profile))
+		} else if (!id.equals(other.id))
 			return false;
 		if (summary == null) {
 			if (other.summary != null)
@@ -165,8 +162,4 @@ public class Education extends AbstractEntity<Long> implements Serializable, Pro
 			return false;
 		return true;
 	}
-
-	
-	
-	
 }

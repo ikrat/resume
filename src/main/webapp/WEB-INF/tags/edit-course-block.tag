@@ -16,16 +16,16 @@
 			</button>
 			<input type="hidden" name="items[${index }].id" value="${course.id }" />
 			<div class="col-md-4">
-				<b>Название курса*</b>
-				<textarea name="items[${index }].name" class="form-control" style="resize: none;">${course.name }</textarea>
+				<b>*Course name:</b>
+				<textarea name="items[${index }].name" class="form-control" style="resize: none;" required="required">${course.name }</textarea>
 			</div>
 			<div class="col-md-4">
-				<b>Название школы/площадки*</b>
-				<textarea name="items[${index }].school" class="form-control" style="resize: none;">${course.school }</textarea>
+				<b>*School name:</b>
+				<textarea name="items[${index }].school" class="form-control" style="resize: none;" required="required">${course.school }</textarea>
 			</div>
 			<div class="col-md-3">
-				<b>Дата окончания</b>
-				<input name="items[${index }].finishDate" class="datepicker-here form-control"  value="${course.finishDate }"/>
+				<b>*Finish date:</b>
+				<input name="items[${index }].finishDate" class="datepicker-here form-control"  value="${course.finishDate }" required="required"/>
 			</div>
 		</div>
 			

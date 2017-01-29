@@ -16,6 +16,12 @@ public interface ProfileRepository extends PagingAndSortingRepository<Profile, L
 	Profile findByEmail(String email);
 
 	Profile findByPhone(String phone);
+	
+	Profile findById(Long id);
+	
+	Profile findByUidOrEmailOrPhone(String uid, String email, String phone);
+	
+	Profile findByProfileRestoreToken(String token);
 
 	int countByUid(String uid);
 

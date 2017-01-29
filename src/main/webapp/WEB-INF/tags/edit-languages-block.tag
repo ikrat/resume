@@ -14,24 +14,18 @@
 		<div class="col-lg-3 col-sm-2 ">
 			<input type="hidden" name="items[${index }].id" value="${language.id }" />
 			<div class="input-practic">
-				<label for="begin-month">Тип</label> 
+				<label for="begin-month">*Type:</label> 
 				<select class="form-control" name="items[${index }].type">
-					<option value="ALL">Не указан</option>
-					<option ${language.type == 'WRITING' ? ' selected="selected"' : ''} value="WRITING">Письменный</option>
-					<option ${language.type == 'SPOKEN' ? ' selected="selected"' : ''} value="SPOKEN">Разговорный</option>
+					<option value="ALL">Writing and spoken</option>
+					<option ${language.type == 'WRITING' ? ' selected="selected"' : ''} value="WRITING">Writing</option>
+					<option ${language.type == 'SPOKEN' ? ' selected="selected"' : ''} value="SPOKEN">Spoken</option>
 				</select>
 			</div>
 		</div>
 		<div class="col-lg-3 col-sm-2 ">
 			<div class="input-practic">
-				<label for="begin-month">Язык</label>
-				<select class="form-control" name="items[${index }].name">
-					<option ${language.name == 'English' ? ' selected="selected"' : ''}>English</option>
-					<option ${language.name == 'Spanish' ? ' selected="selected"' : ''}>Spanish</option>
-					<option ${language.name == 'French' ? ' selected="selected"' : ''}>French</option>
-					<option ${language.name == 'German' ? ' selected="selected"' : ''}>German</option>
-					<option ${language.name == 'Italian' ? ' selected="selected"' : ''}>Italian</option>
-				</select>
+				<label for="begin-month">*Language:</label>
+					<textarea name="items[${index }].name" class="form-control" style="resize: none;" required="required">${language.name }</textarea>
 			</div>
 		</div>
 		<div class="col-lg-6 col-sm-6">
@@ -48,5 +42,5 @@
 			</div>
 		</div>
 	</div>
-	<br> <br>
+	<br>
 </div>

@@ -10,21 +10,21 @@ import net.study.resume.annotation.constraints.EnglishLanguage;
 import net.study.resume.annotation.constraints.FieldMatch;
 import net.study.resume.annotation.constraints.PasswordStrength;
 
-@FieldMatch(first="password", second="confirmPassword", message="The password fields must match")
+@FieldMatch(first="password", second="confirmPassword")
 public class SignUpForm implements Serializable{
 	private static final long serialVersionUID = 3163998060601093026L;
 
 	@NotNull
-	@Size(max=50)
+	@Size(min=1, max=50)
 	@EnglishLanguage(withNumbers=false, withSpechSymbols=false)
 	private String firstName;
 	
 	@NotNull
-	@Size(max=50)
+	@Size(min=1, max=50)
 	@EnglishLanguage(withNumbers=false, withSpechSymbols=false)
 	private String lastName;
 	
-	@PasswordStrength
+	//@PasswordStrength
 	private String password;
 	
 	private String confirmPassword;

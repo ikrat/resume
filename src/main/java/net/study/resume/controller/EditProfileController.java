@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import net.study.resume.entity.Profile;
 import net.study.resume.form.CertificateForm;
+import net.study.resume.form.ChangePasswordForm;
 import net.study.resume.form.ContactsForm;
 import net.study.resume.form.CourseForm;
 import net.study.resume.form.EducationForm;
@@ -72,7 +74,7 @@ public class EditProfileController {
 			return "edit/info";
 		}
 		editProfileService.updateInfo(SecurityUtil.getCurrentIdProfile(), form.getProfile());
-		return "redirect:/chris-hemsworth";
+		return "redirect:/my-profile";
 	}
 	
 	@RequestMapping(value="/edit/contacts", method=RequestMethod.GET)
@@ -147,7 +149,7 @@ public class EditProfileController {
 	}
 
 	@RequestMapping(value = "/edit/education", method = RequestMethod.POST)
-	public String saveEducation(@Valid @ModelAttribute("educationForm") EducationForm form, BindingResult bindingResult,
+	public String saveEducation(@ModelAttribute("educationForm") EducationForm form, BindingResult bindingResult,
 			Model model) {
 		if (bindingResult.hasErrors()) {
 			return "edit/education";
@@ -238,6 +240,28 @@ public class EditProfileController {
 		photoDownloadService.downloadPhoto(form);
 		editProfileService.updateProfile(SecurityUtil.getCurrentIdProfile(), form.getProfile());
 		return "redirect:/my-profile";
+	}
+	
+	@RequestMapping(value="/edit/password", method=RequestMethod.GET)
+	public String getEditPassword(Model model) {
+		model.addAttribute("changePasswordForm", new ChangePasswordForm());
+		return "/edit/password";
+	}
+	
+	@RequestMapping(value="/edit/password", method=RequestMethod.POST)
+	public String changePassword(@Valid @ModelAttribute("changePasswordForm") ChangePasswordForm form, BindingResult bindingResult, Model model){
+		if(bindingResult.hasErrors()) {
+			return "edit/password";
+		}
+		CurrentProfile currentProfile = SecurityUtil.getCurrentProfile();
+		Profile profile = editProfileService.updatePassword(currentProfile, form);
+		SecurityUtil.authentificate(profile);
+		addAttributeMessage(model, "Password updated!");
+		return "edit/password";
+	}
+
+	private void addAttributeMessage(Model model, String message) {
+		model.addAttribute("message", message);
 	}
 	
 }

@@ -8,7 +8,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button class="close" type="button" data-dismiss="modal">×</button>
-					<h4 class="modal-title">Загрузить файл сертификата</h4>
+					<h4 class="modal-title">Upload certificate file</h4>
 				</div>
 				<div class="modal-body" style="text-align: right;">
 					<div class="row">
@@ -29,13 +29,15 @@
 						<div class="col-lg-12 col-sm-12">
 							<div class="form-group">
 								<input type="text" class="form-control" placeholder="Name certificate" name="name" required="required">
+							<div class="form-group">
+								<form:errors path="uploadForm.name" cssClass="alert alert-danger" element="div" />
+							</div>
 							</div>
 						</div>
 						<div class="col-xs-12 text-center">
-						<input type="submit" class="btn btn-primary" value="Добавить сертификат">
+						<input type="submit" class="btn btn-primary" value="Add certificate">
 					</div>
 					</div>
-					
 				</div>
 			</div>
 		</div>

@@ -3,6 +3,8 @@ package net.study.resume.model;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
+import net.study.resume.util.DataUtil;
+
 public enum LanguageLevel {
 
 	BEGINNER,
@@ -25,6 +27,10 @@ public enum LanguageLevel {
 
 	public String getDbValue() {
 		return name().toLowerCase();
+	}
+	
+	public String getPageValue() {
+		return DataUtil.capitalizeName(name().replace("_", "-"));
 	}
 	
 	

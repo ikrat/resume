@@ -13,8 +13,8 @@
 		<button type="button" class="close" onclick="$('#ui-item-${index }').remove();">
 			<span aria-hidden="true">&times;</span>
 		</button>
-		<a data-title="Certificate" href="${certificate.largeUrl }" class="thumbnail certificate-link" style="width: 170px;"> <img alt="Certificate"
-			src="${certificate.smallUrl }" class="img-responsive"> <span>${certificate.name }</span>
+		<a data-title="Certificate" href="${certificate.largeUrl }" class="thumbnail certificate-link" style="width: 170px;"> 
+		<img alt="Certificate" src="${certificate.smallUrl }" class="img-responsive"> <span>${certificate.name }</span>
 		</a>
 	</div>
 </div>

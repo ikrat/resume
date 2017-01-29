@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class UploadForm {
 	
-	@Size(min=4, max=45)
+	@Size(min=1, max=45)
 	private String name;
 	private MultipartFile file;
 

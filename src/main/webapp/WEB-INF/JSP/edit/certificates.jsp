@@ -6,7 +6,7 @@
 <resume:edit-navbar section="Certificates"/>
 <div class="panel panel-primary">
 	<div class="panel-body">
-		<h4 class="data-header" align="center">Сертификаты</h4>
+		<h4 class="data-header" align="center">Certificates:</h4>
 		<hr />
 		<form:form action="/edit/certificates" method="post" commandName="certificateForm">
 			<div id="ui-block-container">
@@ -15,7 +15,7 @@
 				</c:forEach>
 				<div class="row" align="center">
 					<div class="col-xs-12">
-						<a data-target="#myModal" data-toggle="modal"> + Добавить сертификат</a>
+						<a data-target="#myModal" data-toggle="modal"> + Add certificate</a>
 					</div>
 				</div>
 			</div>
@@ -23,7 +23,8 @@
 			<hr />
 			<div class="row">
 				<div class="col-xs-12 text-center">
-					<input type="submit" class="btn btn-primary" value="Сохранить">
+					<input type="submit" class="btn btn-primary" value="Save">
+					<a href="/edit/courses" class="btn btn-primary">Skip</a>
 				</div>
 			</div>
 		</form:form>

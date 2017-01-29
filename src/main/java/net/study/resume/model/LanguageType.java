@@ -3,6 +3,8 @@ package net.study.resume.model;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
+import net.study.resume.util.DataUtil;
+
 public enum LanguageType {
 
 	ALL,
@@ -23,6 +25,10 @@ public enum LanguageType {
 		} else {
 			throw new IllegalArgumentException(this+" does not have reverse type");
 		}
+	}
+	
+	public String getPageValue() {
+		return DataUtil.capitalizeName(name());
 	}
 	
 	@Converter

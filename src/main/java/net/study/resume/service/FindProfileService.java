@@ -9,9 +9,15 @@ public interface FindProfileService {
 
 	Profile findByUid(String uid);
 	
+	Profile findById(long id);
+	
 	Page<Profile> findAll(Pageable pageable);
 	
 	Iterable<Profile> findAllForIndexing();
 	
 	Page<Profile> findBySearchQuery(String query, Pageable pageable);
+	
+	Profile findByRestoreToken(String token);
+	
+	Profile findByUniqueId(String anyUniqueId);
 }

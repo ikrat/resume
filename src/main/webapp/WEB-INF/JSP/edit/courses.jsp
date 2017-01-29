@@ -7,10 +7,10 @@
 <div class="panel panel-primary">
 	<div class="panel-body">
 		<div class="col-md-12">
-			<h4 class="data-header" align="center">Курсы повышения квалификации</h4>
-			<h5 class="data-body" align="center">(Упорядоченные по убыванию)</h5>
+			<h4 class="data-header" align="center">Training courses</h4>
+			<h5 class="data-body" align="center">(Ordered descending)</h5>
 			<hr />
-			<form:form action="/edit/courses" method="post" commandName="courseForm">
+			<form:form action="/edit/courses?${_csrf.parameterName}=${_csrf.token}" method="post" commandName="courseForm">
 				<div id="ui-block-container">
 					<c:forEach var="course" items="${courseForm.items }" varStatus="status">
 						<resume:edit-course-block index="${status.index }" course="${course }" />
@@ -21,13 +21,14 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-12">
-						<a href="javascript:void(0);">+ Добавить курс</a>
+						<a href="javascript:void(0);">+ Add course</a>
 					</div>
 				</div>
 				<hr />
 				<div class="row">
 					<div class="col-xs-12 text-center">
-						<input type="submit" class="btn btn-primary" value="Сохранить">
+						<input type="submit" class="btn btn-primary" value="Save">
+						<a href="/edit/education" class="btn btn-primary">Skip</a>
 					</div>
 				</div>
 			</form:form>

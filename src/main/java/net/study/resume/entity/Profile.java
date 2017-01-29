@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -142,6 +143,18 @@ public class Profile extends AbstractEntity<Long> implements Serializable {
 	@OrderBy("finishDate DESC")
 	private List<Course> courses;
 	
+	@OneToOne(targetEntity = ProfileRestore.class, cascade = { CascadeType.MERGE, CascadeType.PERSIST }, mappedBy = "profile", orphanRemoval = true)
+	@JsonIgnore
+	private ProfileRestore profileRestore;
+
+	public ProfileRestore getProfileRestore() {
+		return profileRestore;
+	}
+
+	public void setProfileRestore(ProfileRestore profileRestore) {
+		this.profileRestore = profileRestore;
+	}
+
 	@Embedded
 	private Contacts contacts;
 
@@ -357,7 +370,7 @@ public class Profile extends AbstractEntity<Long> implements Serializable {
 		if(largePhoto != null) {
 			return largePhoto;
 		} else {
-			return "/static/img/profile-placeholder.png";
+			return "/static/img/unknown.jpg";
 		}
 	}
 	

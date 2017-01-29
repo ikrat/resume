@@ -20,8 +20,8 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.filter.RequestContextFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import net.study.resume.component.impl.ApplicationListener;
 import net.study.resume.filter.ResumeFilter;
-import net.study.resume.listener.ApplicationListener;
 
 public class ResumeWebApplicationInitializer implements WebApplicationInitializer {
 

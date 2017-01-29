@@ -4,13 +4,18 @@
 
 
 <div class="panel panel-primary">
-	<c:if test="${profile.largePhoto != null }">
-		<a href="/edit"><img class="img-responsive photo" src="${profile.largePhoto}" alt="photo"></a>
-	</c:if>
+	<c:choose>
+		<c:when test="${profile.largePhoto != null }">
+			<img class="img-responsive photo" src="${profile.largePhoto }" alt="photo">
+		</c:when>
+		<c:otherwise>
+			<img class="img-responsive photo" src="/static/img/unknown.jpg" alt="photo">
+		</c:otherwise>
+	</c:choose>
 	<h1 class="text-center">
-		<a href="/edit" style="color: black;">${profile.fullName}</a>
+		${profile.fullName}
 	</h1>
-	<c:if test="${profile.country != null || profile.city != null }">
+	<c:if test="${!profile.country.isEmpty() || !profile.city.isEmpty() || profile.city != null || profile.country != null}">
 		<h6 class="text-center">
 			<strong>${profile.city }</strong>
 			<strong>${profile.country }</strong>
@@ -32,19 +37,19 @@
 			<a class="list-group-item" href="javascript:void(0);"><i class="fa fa-skype"></i>${profile.contacts.skype }</a>
 		</c:if>
 		<c:if test="${!profile.contacts.vkontakte.isEmpty() && profile.contacts.vkontakte != null}">
-			<a target="_blank" class="list-group-item" href="${profile.contacts.vkontakte}"><i class="fa fa-vk"></i>${profile.contacts.vkontakte }</a>
+			<a target="_blank" class="list-group-item" href="https://vk.com/${profile.contacts.vkontakte}"><i class="fa fa-vk"></i>https://vk.com/${profile.contacts.vkontakte }</a>
 		</c:if>
 		<c:if test="${!profile.contacts.facebook.isEmpty() && profile.contacts.facebook != null}">
-			<a target="_blank" class="list-group-item" href="${profile.contacts.facebook }"><i class="fa fa-facebook"></i> ${profile.contacts.facebook }</a>
+			<a target="_blank" class="list-group-item" href="https://facebook.com/${profile.contacts.facebook }"><i class="fa fa-facebook"></i>https://facebook.com/${profile.contacts.facebook }</a>
 		</c:if>
 		<c:if test="${!profile.contacts.linkedin.isEmpty() && profile.contacts.linkedin != null}">
-			<a target="_blank" class="list-group-item" href="${profile.contacts.linkedin }"><i class="fa fa-linkedin"></i> ${profile.contacts.linkedin }</a>
+			<a target="_blank" class="list-group-item" href="https://linkedin.com/in/${profile.contacts.linkedin }"><i class="fa fa-linkedin"></i>https://linkedin.com/in/${profile.contacts.linkedin }</a>
 		</c:if>
 		<c:if test="${!profile.contacts.github.isEmpty() && profile.contacts.github != null }">
-			<a target="_blank" class="list-group-item" href="${profile.contacts.github }"><i class="fa fa-github"></i>${profile.contacts.github }</a>
+			<a target="_blank" class="list-group-item" href="https://github.com/${profile.contacts.github }"><i class="fa fa-github"></i>https://github.com/${profile.contacts.github }</a>
 		</c:if>
 		<c:if test="${!profile.contacts.stackoverflow.isEmpty() && profile.contacts.stackoverflow != null}">
-			<a class="list-group-item" href="${profile.contacts.stackoverflow }"><i class="fa fa-stack-overflow"></i>${profile.getContacts().stackoverflow }</a>
+			<a class="list-group-item" href="https://stackoverflow.com/${profile.contacts.stackoverflow }"><i class="fa fa-stack-overflow"></i>https://stackoverflow.com/${profile.contacts.stackoverflow }</a>
 		</c:if>
 	</div>
 </div>

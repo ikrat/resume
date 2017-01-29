@@ -7,7 +7,7 @@
 		<div class="col-xs-12">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<h2 class="text-center caption">Web приложение 'My Resume' - создайте Ваше резюме в 10 кликов</h2>
+					<h2 class="text-center caption">Web application 'My Resume' - create your resume in 10 clicks</h2>
 					<img class="img-responsive" src="/static/img/logo-large.png" alt="logo-large" style="width: 100%;">
 				</div>
 			</div>
@@ -25,5 +25,6 @@
 				</div>
 			</c:if>
 		</div>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	</div>
 </div>
