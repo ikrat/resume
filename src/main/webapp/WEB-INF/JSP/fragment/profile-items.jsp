@@ -5,10 +5,19 @@
 	<div class="panel panel-default account-item">
 		<div class="media panel-body">
 			<div class="media-left media-top">
-				<a href="/${profile.uid }"><img alt="${profile.fullName }" src="${profile.smallPhoto }" class="photo"></a>
+				<a href="/${profile.uid }">
+				<c:choose>
+					<c:when test="${profile.smallPhoto == null }">
+						<img alt="${profile.fullName }" src="/static/img/unknown-sm.jpg">
+					</c:when>
+					<c:otherwise>
+						<img alt="${profile.fullName }" src="${profile.smallPhoto }" class="photo">
+					</c:otherwise>
+				</c:choose>
+				</a>
 			</div>
 			<div class="media-body search-result-item">
-				<a href="/${profile.uid }" class="btn btn-primary pull-right">Детали</a>
+				<a href="/${profile.uid }" class="btn btn-primary pull-right">Details</a>
 				<h4 class="media-heading">
 					<a href="/${profile.uid }">${profile.id}) ${profile.fullName }, ${profile.age }</a>
 				</h4>

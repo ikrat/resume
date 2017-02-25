@@ -14,14 +14,16 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import net.study.resume.validator.AdulthoodConstraintValidator;
+
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = { })
+@Constraint(validatedBy = { AdulthoodConstraintValidator.class })
 public @interface Adulthood {
 
-	String message() default "Adulthood";
+	String message() default "Your age should be more than 18.";
 	
 	int adulthoodAge() default 18;
 	

@@ -30,7 +30,7 @@
 		</div>
 		<div class="col-lg-6 col-sm-6">
 			<div class="input-practic">
-				<label for="begin-month">Уровень</label> <select class="form-control" name="items[${index }].level">
+				<label for="begin-month">*Level:</label> <select class="form-control" name="items[${index }].level">
 					<option ${language.level == 'BEGINNER' ? ' selected="selected"' : ''} value="BEGINNER">Beginner</option>
 					<option ${language.level == 'ELEMENTARY' ? ' selected="selected"' : ''} value="ELEMENTARY">Elementary</option>
 					<option ${language.level == 'PRE_INTERMEDIATE' ? ' selected="selected"' : ''} value="PRE_INTERMEDIATE">Pre-Intermediate</option>

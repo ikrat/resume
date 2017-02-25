@@ -11,9 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
 import net.coobird.thumbnailator.Thumbnails;
-import net.study.resume.entity.Profile;
 import net.study.resume.entity.Certificate;
-import net.study.resume.form.ProfileForm;
+import net.study.resume.entity.Profile;
 import net.study.resume.form.UploadForm;
 import net.study.resume.repository.storage.ProfileRepository;
 import net.study.resume.service.EditProfileService;
@@ -36,7 +35,7 @@ public class PhotoDownloadServiceImpl implements PhotoDownloadService {
 	EditProfileService editProfileService;
 
 	@Override
-	public void downloadPhoto(ProfileForm form) {
+	public void downloadPhoto(Profile form) {
 		try {
 			String uid = UUID.randomUUID().toString() + ".jpg";
 			File photo = new File(temporary + uid);
@@ -46,8 +45,8 @@ public class PhotoDownloadServiceImpl implements PhotoDownloadService {
 			stream.close();
 			String smallUid = uid.replace(".jpg", "-sm.jpg");
 			Thumbnails.of(photo).size(110, 110).toFile(new File(mediaDir + "/avatar/" + smallUid));
-			form.getProfile().setLargePhoto("/media/avatar/" + uid);
-			form.getProfile().setSmallPhoto("/media/avatar/" + smallUid);
+			form.setLargePhoto("/media/avatar/" + uid);
+			form.setSmallPhoto("/media/avatar/" + smallUid);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

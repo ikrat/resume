@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import net.study.resume.Constants;
 import net.study.resume.entity.Profile;
-import net.study.resume.form.ProfileForm;
 import net.study.resume.form.SignUpForm;
 import net.study.resume.model.CurrentProfile;
 import net.study.resume.service.EditProfileService;
@@ -114,18 +113,16 @@ public class PublicDataController {
 	
 	@RequestMapping(value="/sign-up-success")
 	public String signUpSuccess(Model model){
-		model.addAttribute("profileForm", new ProfileForm(editProfileService.profile(SecurityUtil.getCurrentIdProfile())));
+		model.addAttribute("profile", editProfileService.profile(SecurityUtil.getCurrentIdProfile()));
 		return "/sign-up-success";
 	}
 	
 	@RequestMapping(value="/sign-up-main", method=RequestMethod.GET)
 	public String getSignUpMain(Model model){
-		model.addAttribute("profileForm", new ProfileForm(editProfileService.profile(SecurityUtil.getCurrentIdProfile())));
+		model.addAttribute("profile", editProfileService.profile(SecurityUtil.getCurrentIdProfile()));
 		return "sign-up-main";
 	}
-	
-	
-	
+		
 	@RequestMapping(value="/fragment/more", method=RequestMethod.GET)
 	public String moreProfiles(Model model, @PageableDefault(size=Constants.MAX_PROFILES_PER_PAGE) @SortDefault(sort="id") Pageable pageable) throws UnsupportedEncodingException {
 		Page<Profile> profiles = findProfileService.findAll(pageable);

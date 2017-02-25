@@ -14,14 +14,16 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import net.study.resume.validator.MinSpecCharCountConstraintValidator;
+
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy={})
+@Constraint(validatedBy={MinSpecCharCountConstraintValidator.class})
 public @interface MinSpecCharCount {
 
-	int value() default 1;
+	int value() default 0;
 	
 	String specSymbols() default "!@~`#$%^&*()_-+=|\\/{}[].,;:/?";
 	

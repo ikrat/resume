@@ -8,47 +8,38 @@
 		<div class="panel-heading">
 			<h3 class="panel-title">Enter your personal information.</h3>
 		</div>
-
 		<div class="panel-body">
 			<form:form action="/sign-up" method="post" commandName="signUpForm">
 				<div class="container-fluid">Keep in mind that the name you entered can not be changed in the future! So enter the real name!</div>
-				<hr>
-				<div class="container-fluid">
-					<h5>
-						<b>First name:</b>
-					</h5>
-					<input name="firstName" class="form-control" id="inputFirstName" value="${signUpForm.firstName }" placeholder="Example:Richard" />
-				</div>
-				<div class="container-fluid">
-					<form:errors path="firstName" cssClass="alert alert-danger" element="div" />
-				</div>
-				<div class="container-fluid">
-					<h5>
-						<b>Last name:</b>
-					</h5>
-					<input name="lastName" class="form-control" id="inputLastName" value="${signUpForm.lastName }" placeholder="Example:Hendricks" />
-				</div>
-				<div class="container-fluid">
-					<form:errors path="lastName" cssClass="alert alert-danger" element="div" />
-				</div>
-				<div class="container-fluid">
-					<h5>
+				<div class="row">
+					<hr>
+					<div class="col-md-6">
+						<b>First name:</b> 
+						<input name="firstName" class="form-control" id="inputFirstName" value="${signUpForm.firstName }" placeholder="Example:Richard" />
+						<form:errors path="firstName" cssClass="alert alert-danger" element="div" />
+					</div>
+					<div class="col-md-6">
+						<b>Last name:</b> 
+						<input name="lastName" class="form-control" id="inputLastName" value="${signUpForm.lastName }" placeholder="Example:Hendricks" />
+						<form:errors path="lastName" cssClass="alert alert-danger" element="div" />
+					</div>
+					<div class="col-md-12">
+						<b>Email:</b>
+						<input name="email" type="text" class="form-control" placeholder="Email" />
+						<form:errors path="email" cssClass="alert alert-danger" role="alert" element="div" />
+					</div>
+					<div class="col-md-12">
 						<b>Password:</b>
-					</h5>
-					<input name="password" class="form-control" id="inputPassword" value="${signUpForm.password }" />
-				</div>
-				<div class="container-fluid">
-					<form:errors path="password" cssClass="alert alert-danger" element="div" />
-				</div>
-				<div class="container-fluid">
-					<h5>
+						<input name="password" type="password" class="form-control" placeholder="Password" />
+						<form:errors path="password" cssClass="alert alert-danger" role="alert" element="div" />
+						<div class="pwstrength_viewport_progress"></div>
+					</div>
+					<div class="col-md-12">
 						<b>Confirm password:</b>
-					</h5>
-					<input name="confirmPassword" class="form-control" id="confirmPassword" value="${signUpForm.confirmPassword }" />
-				</div>
-				<div class="container-fluid">
-					<form:errors path="confirmPassword" cssClass="alert alert-danger" role="alert" element="div" />
-					<form:errors path="" cssClass="alert alert-danger" element="div" />
+						<input name="confirmPassword" type="password" class="form-control" placeholder="Confirm password" />
+						<form:errors path="confirmPassword" cssClass="alert alert-danger" role="alert" element="div" />
+						<form:errors path="" cssClass="alert alert-danger" element="div" />
+					</div>
 				</div>
 				<br>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

@@ -13,12 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.study.resume.entity.Profile;
-import net.study.resume.entity.ProfileRestore;
-import net.study.resume.exception.CantCompleteClientRequestException;
 import net.study.resume.model.CurrentProfile;
 import net.study.resume.repository.search.ProfileSearchRepository;
 import net.study.resume.repository.storage.ProfileRepository;
-import net.study.resume.repository.storage.ProfileRestoreRepository;
 import net.study.resume.service.FindProfileService;
 
 @Service
@@ -31,9 +28,6 @@ public class FindProfileServiceImpl implements FindProfileService, UserDetailsSe
 	
 	@Autowired
 	private ProfileSearchRepository profileSearchRepository;
-	
-	@Autowired
-	private ProfileRestoreRepository profileRestoreRepository;
 	
 	@Value("${app.host}")
 	private String appHost;

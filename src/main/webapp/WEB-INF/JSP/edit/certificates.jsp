@@ -15,7 +15,7 @@
 				</c:forEach>
 				<div class="row" align="center">
 					<div class="col-xs-12">
-						<a data-target="#myModal" data-toggle="modal"> + Add certificate</a>
+						<a class="btn btn-primary" data-target="#myModal" data-toggle="modal"> + Add certificate</a>
 					</div>
 				</div>
 			</div>

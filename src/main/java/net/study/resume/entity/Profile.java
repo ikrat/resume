@@ -18,12 +18,13 @@ import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.joda.time.LocalDate;
 import org.joda.time.Years;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -45,7 +46,7 @@ public class Profile extends AbstractEntity<Long> implements Serializable {
 	private Long id;
 
 	@Column(name = "birth_day")
-	@Adulthood
+	//@Adulthood
 	private Date birthDay;
 
 	@Column
@@ -58,12 +59,10 @@ public class Profile extends AbstractEntity<Long> implements Serializable {
 
 	@Column(name = "first_name", nullable = false, length = 50)
 	@EnglishLanguage
-	@NotNull
 	private String firstName;
 
 	@Column(name = "last_name", nullable = false, length = 50)
 	@EnglishLanguage
-	@NotNull
 	private String lastName;
 
 	@Column(length = 2147483647)
@@ -77,13 +76,12 @@ public class Profile extends AbstractEntity<Long> implements Serializable {
 	private String smallPhoto;
 
 	@Column(length = 20)
-	@Phone
-	@JsonIgnore
+	//@Phone
+	//@Size(min=3, max=15, message="Size should be between 3 and 15 numbers.")
 	private String phone;
 
 	@Column(length = 100)
-	@Email
-	@JsonIgnore
+	//@Email
 	private String email;
 	
 	@Column
@@ -95,27 +93,22 @@ public class Profile extends AbstractEntity<Long> implements Serializable {
 	private String summary;
 
 	@Column(nullable = false, length = 100)
-	@NotNull
-	@EnglishLanguage
 	private String uid;
 	
 	@Column(nullable = false, length = 100)
-	@PasswordStrength
-	@NotNull
-	@JsonIgnore
+	//@PasswordStrength
 	private String password;
 	
 	@Column(nullable = false)
-	@NotNull
 	@JsonIgnore
 	private boolean completed;
 	
 	@Column(insertable=false)
-	@NotNull
 	@JsonIgnore
 	private Timestamp created;
 
 	@OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
+	@JsonIgnore
 	private List<Certificate> certificates;
 
 	@OneToMany(mappedBy = "profile", cascade={CascadeType.MERGE, CascadeType.PERSIST})
@@ -157,6 +150,17 @@ public class Profile extends AbstractEntity<Long> implements Serializable {
 
 	@Embedded
 	private Contacts contacts;
+	
+	@Embedded
+	private MultipartFile file;
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
 
 	public Profile() {
 	}

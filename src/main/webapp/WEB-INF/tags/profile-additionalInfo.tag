@@ -13,7 +13,7 @@
 	</div>
 	<div class="panel-body">
 		<c:choose>
-			<c:when test="${profile.info.isEmpty() || profile.info == null }">
+			<c:when test="${profile.info == null }">
 			<div align="center">
 				<h6><b>Additional information is not filled.</b></h6>
 			</div>

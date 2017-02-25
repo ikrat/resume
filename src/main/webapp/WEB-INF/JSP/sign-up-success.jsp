@@ -9,8 +9,8 @@
 			<h3 class="panel-title"><i class="fa fa-thumbs-o-up"></i> Sign up success!</h3>
 		</div>
 		<div class="panel-body">
-			After the registration your profile will be available at the following link:<a href="/${profileForm.profile.uid }">http://localhost:8080/${profileForm.profile.uid }</a><br>
-			Your UID:<b>${profileForm.profile.uid }</b>. Use the UID, to enter in your personal account.
+			After the registration your profile will be available at the following link:<a href="http://localhost:8080/${profile.uid }">http://localhost:8080/${profile.uid }.</a><br>
+			Your UID:<b>${profile.uid }</b>. Use the UID, to enter in your personal account.
 		</div>
 		<hr>
 		<div class="row">

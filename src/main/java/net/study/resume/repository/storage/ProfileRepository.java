@@ -21,9 +21,15 @@ public interface ProfileRepository extends PagingAndSortingRepository<Profile, L
 	
 	Profile findByUidOrEmailOrPhone(String uid, String email, String phone);
 	
+	Profile findByEmailOrPhone(String email, String phone);
+	
 	Profile findByProfileRestoreToken(String token);
 
 	int countByUid(String uid);
+	
+	int countByEmail(String email);
+	
+	int countByPhone(String phone);
 
 	Page<Profile> findAllByCompletedTrue(Pageable pageable);
 

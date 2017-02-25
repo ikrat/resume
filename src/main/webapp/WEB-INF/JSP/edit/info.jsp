@@ -11,11 +11,11 @@
 			<b>A few words about myself, who will present to you an advantage over other candidates</b>
 		</h5>
 		<hr />
-		<form:form action="/edit/info?${_csrf.parameterName}=${_csrf.token}" method="post" commandName="profileForm">
+		<form:form action="/edit/info" method="post" commandName="profile">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-12">
-						<textarea name="profile.info" class="form-control-summary pull-right" style="resize: none;">${profileForm.profile.info }</textarea>
+						<textarea name="info" class="form-control-summary pull-right" style="resize: none;">${profile.info }</textarea>
 					</div>
 
 				</div>

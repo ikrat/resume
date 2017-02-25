@@ -7,3 +7,4 @@
 <link rel="stylesheet" href="/static/css/timeline.css">
 <link rel="stylesheet" href="/static/css/app.css">
 <link rel="stylesheet" href="/static/css/datepicker.css">
+<link rel="stylesheet" href="/static/css/fileinput.css">

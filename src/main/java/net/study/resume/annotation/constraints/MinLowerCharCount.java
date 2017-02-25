@@ -14,14 +14,16 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import net.study.resume.validator.MinLowerCharCountConstraintValidator;
+
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy={})
+@Constraint(validatedBy={MinLowerCharCountConstraintValidator.class})
 public @interface MinLowerCharCount {
 
-	int value() default 1;
+	int value() default 0;
 	
 	String message() default "MinLowerCharCount";
 	

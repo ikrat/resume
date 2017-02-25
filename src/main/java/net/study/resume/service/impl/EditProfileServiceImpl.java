@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.springframework.util.StringUtils;
 
 import net.study.resume.entity.Certificate;
 import net.study.resume.entity.Contacts;
@@ -82,9 +83,11 @@ public class EditProfileServiceImpl implements EditProfileService {
 	@Transactional
 	public Profile createNewProfile(SignUpForm signUpForm) {
 		Profile profile = new Profile();
+		checkEmailIsUnique(signUpForm.getEmail());
 		profile.setUid(generateProfileUid(signUpForm.getFirstName(), signUpForm.getLastName()));
 		profile.setFirstName(DataUtil.capitalizeName(signUpForm.getFirstName()));
 		profile.setLastName(DataUtil.capitalizeName(signUpForm.getLastName()));
+		profile.setEmail(signUpForm.getEmail());
 		profile.setPassword(passwordEncoder.encode(signUpForm.getPassword()));
 		profile.setCompleted(false);
 		profileRepository.save(profile);
@@ -92,6 +95,12 @@ public class EditProfileServiceImpl implements EditProfileService {
 		return profile;
 	}
 	
+	private void checkEmailIsUnique(String email) throws CantCompleteClientRequestException {
+		if(profileRepository.countByEmail(email) != 0) {
+			throw new CantCompleteClientRequestException("Email is already used.");
+		}
+	}
+
 	private void registerCreateIndexProfileIfTransactionSuccess(final Profile profile) {
 		TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronizationAdapter() {
 			@Override
@@ -257,19 +266,49 @@ public class EditProfileServiceImpl implements EditProfileService {
 
 	@Override
 	@Transactional
-	public void updateProfile(long idProfile, Profile profileForm) {
+	public void updateProfile(long idProfile, Profile profile) {
 		Profile prof = profileRepository.findOne(idProfile);
-		prof.setBirthDay(profileForm.getBirthDay());
-		prof.setCountry(profileForm.getCountry());
-		prof.setCity(profileForm.getCity());
-		prof.setEmail(profileForm.getEmail());
-		prof.setPhone(profileForm.getPhone());
-		prof.setObjective(profileForm.getObjective());
-		prof.setSummary(profileForm.getSummary());
-		prof.setLargePhoto(profileForm.getLargePhoto());
-		prof.setSmallPhoto(profileForm.getSmallPhoto());
+		checkEmailIsUniqueAfterReg(idProfile, profile.getEmail());
+		checkPhoneIsUniqueAfterReg(idProfile, profile.getPhone());
+		if(StringUtils.isEmpty(profile.getBirthDay())){
+			prof.setBirthDay(null);
+		} else {
+			prof.setBirthDay(profile.getBirthDay());
+		}
+		prof.setCountry(profile.getCountry());
+		prof.setCity(profile.getCity());
+		prof.setEmail(profile.getEmail());
+		prof.setPhone(profile.getPhone());
+		prof.setObjective(profile.getObjective());
+		prof.setSummary(profile.getSummary());
+		prof.setLargePhoto(profile.getLargePhoto());
+		prof.setSmallPhoto(profile.getSmallPhoto());
 		profileRepository.save(prof);
 		registerUpdateIndexAccountIfTransactionSuccess(idProfile, prof);
+	}
+	
+
+	private void checkEmailIsUniqueAfterReg(Long idProfile, String email) throws CantCompleteClientRequestException{
+		Profile profile = profileRepository.findByEmail(email);
+		if(profile != null) {
+			if(profile.getEmail().isEmpty()) {
+				throw new CantCompleteClientRequestException("Please input email.");
+			}
+			if(!idProfile.equals(profile.getId())){
+				LOGGER.error("Email is already used.");
+				throw new CantCompleteClientRequestException("Email " + email + " is already used.");
+			}
+		}
+	}
+
+	private void checkPhoneIsUniqueAfterReg(Long idProfile, String phone) throws CantCompleteClientRequestException {
+		Profile profile = profileRepository.findByPhone(phone);
+		if(profile != null) {
+			if(!idProfile.equals(profile.getId())){
+				LOGGER.error("Phone is already used.");
+				throw new CantCompleteClientRequestException("Phone is already used.");
+			}
+		}
 	}
 
 	private void registerUpdateIndexAccountIfTransactionSuccess(final long idProfile, final Profile prof) {

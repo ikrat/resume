@@ -8,7 +8,7 @@
 	<div class="panel-body">
 		<h4 class="data-header" align="center">Additional contacts: skype, links to social profiles, etc.</h4>
 		<hr />
-		<form:form action="/edit/contacts?${_csrf.parameterName}=${_csrf.token}" method="post" commandName="contactsForm">
+		<form:form action="/edit/contacts" method="post" commandName="contacts">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-6">
@@ -18,7 +18,7 @@
 							</h5>
 						</div>
 						<div class="col-md-9">
-							<input name="contacts.skype" class="form-control pull-right" value="${contactsForm.contacts.skype }">
+							<input name="skype" class="form-control pull-right" value="${contacts.skype }">
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -41,7 +41,7 @@
 								</h5>
 							</div>
 							<div class="col-md-9">
-								<textarea name="contacts.vkontakte" class="form-control pull-right" style="resize: none;">${contactsForm.contacts.vkontakte } </textarea>
+								<textarea name="vkontakte" class="form-control pull-right" style="resize: none;">${contacts.vkontakte } </textarea>
 							</div>
 						</div>
 						<hr />
@@ -52,7 +52,7 @@
 								</h5>
 							</div>
 							<div class="col-md-9">
-								<textarea name="contacts.facebook" class="form-control pull-right" style="resize: none;">${contactsForm.contacts.facebook } </textarea>
+								<textarea name="facebook" class="form-control pull-right" style="resize: none;">${contacts.facebook } </textarea>
 							</div>
 						</div>
 						<hr />
@@ -63,7 +63,7 @@
 								</h5>
 							</div>
 							<div class="col-md-9">
-								<textarea name="contacts.linkedin" class="form-control pull-right" style="resize: none;">${contactsForm.contacts.linkedin } </textarea>
+								<textarea name="linkedin" class="form-control pull-right" style="resize: none;">${contacts.linkedin } </textarea>
 							</div>
 						</div>
 						<hr />
@@ -74,7 +74,7 @@
 								</h5>
 							</div>
 							<div class="col-md-9">
-								<textarea name="contacts.github" class="form-control pull-right" style="resize: none;">${contactsForm.contacts.github } </textarea>
+								<textarea name="github" class="form-control pull-right" style="resize: none;">${contacts.github } </textarea>
 							</div>
 						</div>
 						<hr />
@@ -85,7 +85,7 @@
 								</h5>
 							</div>
 							<div class="col-md-9">
-								<textarea name="contacts.stackoverflow" class="form-control pull-right" style="resize: none;">${contactsForm.contacts.stackoverflow } </textarea>
+								<textarea name="stackoverflow" class="form-control pull-right" style="resize: none;">${contacts.stackoverflow } </textarea>
 							</div>
 						</div>
 					</div>

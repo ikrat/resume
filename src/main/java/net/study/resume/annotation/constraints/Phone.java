@@ -14,14 +14,19 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+import net.study.resume.validator.PhoneConstraintValidator;
+
 
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RUNTIME)
 @Documented
-@Constraint(validatedBy = {})
+@Constraint(validatedBy = {PhoneConstraintValidator.class})
 public @interface Phone {
 
-	String message() default "Phone";
+	//+
+	boolean withSpechSymbol() default true;
+	
+	String message() default "Number format should be: +<country code><operator/region code><phone number>.";
 	
 	Class<? extends Payload>[] payload() default { };
 	

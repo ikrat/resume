@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.User;
 import net.study.resume.Constants;
 import net.study.resume.entity.Profile;
 
-public class CurrentProfile extends User{
+public class CurrentProfile extends User {
 	private static final long serialVersionUID = 5273148677718047972L;
 	private final Long id;
 	private final String fullName;

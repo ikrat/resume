@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import net.study.resume.entity.Contacts;
 import net.study.resume.entity.Profile;
 import net.study.resume.form.CertificateForm;
 import net.study.resume.form.ChangePasswordForm;
-import net.study.resume.form.ContactsForm;
 import net.study.resume.form.CourseForm;
 import net.study.resume.form.EducationForm;
 import net.study.resume.form.HobbiesForm;
 import net.study.resume.form.LanguagesForm;
 import net.study.resume.form.PracticsForm;
-import net.study.resume.form.ProfileForm;
 import net.study.resume.form.SkillForm;
 import net.study.resume.form.UploadForm;
 import net.study.resume.model.CurrentProfile;
 import net.study.resume.repository.storage.HobbiesCategoryRepository;
 import net.study.resume.service.EditProfileService;
 import net.study.resume.service.PhotoDownloadService;
+import net.study.resume.util.FormUtil;
 import net.study.resume.util.SecurityUtil;
 
 @Controller
@@ -45,51 +45,54 @@ public class EditProfileController {
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String getEditProfile(Model model) {
-		model.addAttribute("profileForm", new ProfileForm(editProfileService.profile(SecurityUtil.getCurrentIdProfile())));
+		model.addAttribute("profile", editProfileService.profile(SecurityUtil.getCurrentIdProfile()));
 		return "edit";
 	}
 	
 	@RequestMapping(value="/edit", method=RequestMethod.POST)
-	public String saveEditProfile(@ModelAttribute("profileForm") ProfileForm form, BindingResult bindingResult, Model model) {
+	public String saveEditProfile(@Valid @ModelAttribute("profile") Profile form, BindingResult bindingResult, Model model) {
 		if(bindingResult.hasErrors()) {
-			return "edit";
+			return "error";
 		}
 		if(!form.getFile().isEmpty()) {
 			photoDownloadService.downloadPhoto(form);
 		}
-		editProfileService.updateProfile(SecurityUtil.getCurrentIdProfile(), form.getProfile());
+		Profile preparedForm = FormUtil.setBlankItemsAsNull(form);
+		editProfileService.updateProfile(SecurityUtil.getCurrentIdProfile(), preparedForm);
 		return "redirect:/edit/contacts";
 	}
 	
 	@RequestMapping(value="/edit/info", method=RequestMethod.GET)
 	public String getInfo(Model model){
-		model.addAttribute("profileForm", new ProfileForm(editProfileService.profile(SecurityUtil.getCurrentIdProfile())));
+		model.addAttribute("profile", editProfileService.profile(SecurityUtil.getCurrentIdProfile()));
 		return "edit/info";
 		
 	}
 	
 	@RequestMapping(value="/edit/info", method=RequestMethod.POST)
-	public String saveInfo(@ModelAttribute("profileForm") ProfileForm form, BindingResult bindingResult, Model model){
+	public String saveInfo(@ModelAttribute("profile") Profile form, BindingResult bindingResult, Model model){
 		if(bindingResult.hasErrors()){
 			return "edit/info";
 		}
-		editProfileService.updateInfo(SecurityUtil.getCurrentIdProfile(), form.getProfile());
+		Profile preparedProfile = FormUtil.setBlankItemAsNull(form);
+		editProfileService.updateInfo(SecurityUtil.getCurrentIdProfile(), preparedProfile);
 		return "redirect:/my-profile";
 	}
 	
 	@RequestMapping(value="/edit/contacts", method=RequestMethod.GET)
 	public String getContacts(Model model) {
-		model.addAttribute("contactsForm", new ContactsForm(editProfileService.contacts(SecurityUtil.getCurrentIdProfile())));
+		model.addAttribute("contacts", editProfileService.contacts(SecurityUtil.getCurrentIdProfile()));
 		return "edit/contacts";
 	}
 	
 	@RequestMapping(value="/edit/contacts", method=RequestMethod.POST)
-	public String saveContacts(@ModelAttribute("contactsForm") ContactsForm contactsForm, BindingResult bindingResult,
+	public String saveContacts(@ModelAttribute("contacts") Contacts contacts, BindingResult bindingResult,
 			Model model) {
 		if(bindingResult.hasErrors()) {
 			return "edit/contacts";
 		}
-		editProfileService.updateContacts(SecurityUtil.getCurrentIdProfile(), contactsForm.getContacts());
+		Contacts preparedForm = FormUtil.setBlankItemsAsNull(contacts);
+		editProfileService.updateContacts(SecurityUtil.getCurrentIdProfile(), preparedForm);
 		return "redirect:/edit/skills";
 	}
 	
@@ -223,7 +226,7 @@ public class EditProfileController {
 	
 	private String gotoHobbiesJSP(Model model) {
 		model.addAttribute("hobbiesCategories", hobbiesCategoryRepository.findAll(new Sort("id")));
-		model.addAttribute("profileForm", new ProfileForm(editProfileService.profile(SecurityUtil.getCurrentIdProfile())));
+		model.addAttribute("profileForm", editProfileService.profile(SecurityUtil.getCurrentIdProfile()));
 		return "edit/hobby";
 	}
 	
@@ -233,12 +236,13 @@ public class EditProfileController {
 	}
 	
 	@RequestMapping(value="/sign-up-main", method=RequestMethod.POST)
-	public String signUpMain(@Valid @ModelAttribute("profileForm") ProfileForm form, BindingResult bindingResult, Model model){
+	public String signUpMain(@ModelAttribute("profile") Profile form, BindingResult bindingResult, Model model){
 		if(bindingResult.hasErrors()) {
 			return "sign-up-main";
 		}
+		Profile preparedProfile = FormUtil.setBlankItemsAsNull(form);
 		photoDownloadService.downloadPhoto(form);
-		editProfileService.updateProfile(SecurityUtil.getCurrentIdProfile(), form.getProfile());
+		editProfileService.updateProfile(SecurityUtil.getCurrentIdProfile(), preparedProfile); 
 		return "redirect:/my-profile";
 	}
 	

@@ -4,7 +4,7 @@
 <%@ taglib prefix="resume" tagdir="/WEB-INF/tags"%>
 
 
-<div id="ui-item-${index }" class="row ui-item skill-item">
+<div id="ui-item-0" class="row ui-item course-item">
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<button type="button" class="close" onclick="$('#ui-item-${index }').remove();">
@@ -24,6 +24,5 @@
 				<input name="items[0].finishDate" class="datepicker-here form-control"  value="${course.finishDate }" required="required"/>
 			</div>
 		</div>
-			
 	</div>
 </div>

@@ -10,18 +10,21 @@
 			<h4 class="data-header" align="center">Training courses</h4>
 			<h5 class="data-body" align="center">(Ordered descending)</h5>
 			<hr />
-			<form:form action="/edit/courses?${_csrf.parameterName}=${_csrf.token}" method="post" commandName="courseForm">
+			<form:form action="/edit/courses" method="post" commandName="courseForm">
 				<div id="ui-block-container">
 					<c:forEach var="course" items="${courseForm.items }" varStatus="status">
 						<resume:edit-course-block index="${status.index }" course="${course }" />
 					</c:forEach>
 					<c:if test="${courseForm.items[0].name == null}">
+						<div id="ui-item-0">
 						<resume:edit-course-empty-block />
+						</div>
 					</c:if>
 				</div>
+				<div id="add-item-div">
 				<div class="row">
 					<div class="col-xs-12">
-						<a href="javascript:void(0);">+ Add course</a>
+						<a href="javascript:resume.addField();">+ Add course</a>
 					</div>
 				</div>
 				<hr />
@@ -30,6 +33,7 @@
 						<input type="submit" class="btn btn-primary" value="Save">
 						<a href="/edit/education" class="btn btn-primary">Skip</a>
 					</div>
+				</div>
 				</div>
 			</form:form>
 		</div>

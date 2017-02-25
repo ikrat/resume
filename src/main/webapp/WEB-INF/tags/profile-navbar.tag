@@ -31,12 +31,7 @@
 						<li><a href="/edit/password"><i class="fa fa-lock" aria-hidden="true"></i> Password</a></li>
 						<li><a href="/remove"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a></li>
 						<li role="separator" class="divider"></li>
-						<li>
-							<form:form action="/sign-out" method="post" id="signoutForm">
-								<a href="#" class="dropdown-menu-aitem" onclick="document.getElementById('signoutForm').submit()"> 
-									<i class="fa fa-sign-out" aria-hidden="true"></i> Exit
-								</a>
-							</form:form>
+						<li><a href="/sign-out"><i class="fa fa-sign-out" aria-hidden="true"></i> Exit </a>
 						</li>
 					</ul>
 				</li>

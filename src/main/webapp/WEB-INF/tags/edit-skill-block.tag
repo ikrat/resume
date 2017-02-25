@@ -19,7 +19,7 @@
 		<button type="button" class="close" onclick="$('#ui-item-${index }').remove();">
 			<span aria-hidden="true">&times;</span>
 		</button>
-		<textarea name="items[${index }].value" class="form-control-skills pull-right" required="required" rows="2">${skill.value }</textarea>
+		<textarea name="items[${index }].value" class="form-control-skills pull-right" rows="2">${skill.value }</textarea>
 	</div>
 </div>
 <div class="row skill-delim" >

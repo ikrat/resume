@@ -20,6 +20,7 @@
 				<div class="container-fluid">
 					<form:errors path="newPassword" cssClass="alert alert-danger" element="div" />
 				</div>
+				<br>
 				<div class="container-fluid">
 					<h5>
 						<b>Confirm password:</b>
@@ -32,10 +33,12 @@
 				</div>
 				<br>
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-12">
 						<input type="submit" class="btn btn-primary" value="Update password">
+						<a href="/my-profile" class="btn btn-primary pull-right">Back to page</a>
 					</div>
 				</div>
+				<br>
 			</form:form>
 		</div>
 	</div>
